@@ -1,10 +1,9 @@
 {
   "name": "avalanche-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "avalanche typescript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
     "test": "ts-node test/test.ts",
     "generate": "ts-node scripts/generate.ts > src/rpc.ts",
