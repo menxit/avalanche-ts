@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { json2ts } = require('json-ts');
 const nodeFetch = require("node-fetch");
+const ASSET_ID_AVAX = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z";
 
 Object.defineProperty(Array.prototype, 'chunk', {
   value: function(chunkSize) {
@@ -112,12 +113,17 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
         used[i.name] = true;
         let res = replaceParameters(i.request.body.raw);
 
-        let optionType: any = "{}";
+        let parameters: any = "";
+        let containsAssetID = false;
         if (res.params !== null) {
           let type = json2ts(JSON.stringify(res.params));
-          optionType = capitalizeFirstLetter(i.name)+"Options";
-          type = type.replace("IRootObject", optionType);
+          const typeName = capitalizeFirstLetter(i.name)+"Options"
+          parameters = `options: ${typeName}`;
+          type = type.replace("IRootObject", typeName);
           prev = addInterfaces(prev, type);
+          const types = type.split("}")
+          const rootType = types[0];
+          containsAssetID = /.*assetID.*/.test(rootType);
         }
         if (i.name === "buildGenesis") {
           return "";
@@ -131,8 +137,8 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
   /**
    * ${formatComment(i.request.description, "   * ")}
    */
-  ${i.name}(options: ${optionType}) {
-    return this.fetch({ endpoint: "${endpoint}", method: "${method}", params: options });
+  ${i.name}(${parameters}) {${containsAssetID ? `\n\t\toptions.assetID = options.assetID || ASSET_ID_AVAX;` : ''}
+    return this.fetch({ endpoint: "${endpoint}", method: "${method}"${parameters === '' ? ' ' : ', params: options ' }});
   }
   
 `

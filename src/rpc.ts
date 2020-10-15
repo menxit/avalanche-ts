@@ -441,7 +441,7 @@ export class Rpc {
     this.url = options.url;
   }
 
-  protected async fetch(options: { endpoint: string, method: string, params: any }) {
+  protected async fetch(options: { endpoint: string, method: string, params?: any }) {
     const url = new URL(this.url);
     url.pathname = options.endpoint;
     return fetch(url.toString(), {
@@ -453,7 +453,7 @@ export class Rpc {
         jsonrpc: "2.0",
         id: 1,
         method: options.method,
-        params: { assetID: "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z", ...options.params },
+        params: { ...options.params },
       }),
     }).then(res => {
       return res.json();
@@ -470,7 +470,7 @@ export class Rpc {
 
 }
 
-export const ASSET_ID_AVAX = "";
+export const ASSET_ID_AVAX = "ASSET_ID_AVAX";
 /**
  * This API can be used for measuring node
  * health and debugging.
@@ -697,6 +697,7 @@ export class AVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetassetdescription)
    */
   getAssetDescription(options: GetAssetDescriptionOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getAssetDescription", params: options });
   }
   
@@ -708,6 +709,7 @@ export class AVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
    */
   getBalance(options: GetBalanceOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/X", method: "avm.getBalance", params: options });
   }
   
@@ -794,6 +796,7 @@ export class AVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreateminttx)
    */
   mint(options: MintOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.mint", params: options });
   }
   
@@ -804,6 +807,7 @@ export class AVM extends Rpc {
    * created with `avm.createNFTAsset`.) @url(https://docs.avax.network/v1.0/en/api/avm/#avmmintnft)
    */
   mintNFT(options: MintNFTOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.mintNFT", params: options });
   }
   
@@ -815,6 +819,7 @@ export class AVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
    */
   send(options: SendOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.send", params: options });
   }
   
@@ -837,6 +842,7 @@ export class AVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
    */
   sendNFT(options: SendNFTOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.sendNFT", params: options });
   }
   
@@ -862,8 +868,8 @@ export class EVM extends Rpc {
    * Getting the most recent block number.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-most-recent-block-number)
    */
-  eth_blockNumber(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_blockNumber", params: options });
+  eth_blockNumber() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_blockNumber" });
   }
   
 
@@ -883,8 +889,8 @@ export class EVM extends Rpc {
    * EIP694.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-chain-id)
    */
-  eth_chainId(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_chainId", params: options });
+  eth_chainId() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_chainId" });
   }
   
 
@@ -978,8 +984,8 @@ export class EVM extends Rpc {
    * Getting the network ID.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-network-id)
    */
-  net_version(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "net_version", params: options });
+  net_version() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "net_version" });
   }
   
 
@@ -1027,8 +1033,8 @@ export class EVM extends Rpc {
    * Listing accounts loaded in EVM node.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#listing-accounts-loaded-in-evm-node)
    */
-  personal_listAccounts(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_listAccounts", params: options });
+  personal_listAccounts() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_listAccounts" });
   }
   
 
@@ -1057,8 +1063,8 @@ export class EVM extends Rpc {
    * is submitted.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-count-of-pending-transactions)
    */
-  txpool_status(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "txpool_status", params: options });
+  txpool_status() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "txpool_status" });
   }
   
 
@@ -1067,8 +1073,8 @@ export class EVM extends Rpc {
    * Getting the current client version.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-current-client-version)
    */
-  web3_clientVersion(options: {}) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "web3_clientVersion", params: options });
+  web3_clientVersion() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "web3_clientVersion" });
   }
   
 
@@ -1100,8 +1106,8 @@ export class Health extends Rpc {
    * Get health check on this node.
    * @url(https://docs.avax.network/v1.0/en/api/health/#healthgetliveness)
    */
-  getLiveness(options: {}) {
-    return this.fetch({ endpoint: "ext/health", method: "health.getLiveness", params: options });
+  getLiveness() {
+    return this.fetch({ endpoint: "ext/health", method: "health.getLiveness" });
   }
   
 
@@ -1300,8 +1306,8 @@ export class Keystore extends Rpc {
    * List the users in this keystore.
    * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystorelistusers)
    */
-  listUsers(options: {}) {
-    return this.fetch({ endpoint: "ext/keystore", method: "keystore.listUsers", params: options });
+  listUsers() {
+    return this.fetch({ endpoint: "ext/keystore", method: "keystore.listUsers" });
   }
   
 

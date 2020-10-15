@@ -18,7 +18,7 @@ export class Rpc {
     this.url = options.url;
   }
 
-  protected async fetch(options: { endpoint: string, method: string, params: any }) {
+  protected async fetch(options: { endpoint: string, method: string, params?: any }) {
     const url = new URL(this.url);
     url.pathname = options.endpoint;
     return fetch(url.toString(), {
@@ -30,7 +30,7 @@ export class Rpc {
         jsonrpc: "2.0",
         id: 1,
         method: options.method,
-        params: { assetID: "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z", ...options.params },
+        params: { ...options.params },
       }),
     }).then(res => {
       return res.json();
@@ -47,4 +47,4 @@ export class Rpc {
 
 }
 
-export const ASSET_ID_AVAX = "";
+export const ASSET_ID_AVAX = "ASSET_ID_AVAX";
