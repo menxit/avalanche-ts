@@ -134,6 +134,7 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
   ${i.name}(options: ${optionType}) {
     return this.fetch({ endpoint: "${endpoint}", method: "${method}", params: options });
   }
+  
 `
       }).filter(x => !!x).join("\n");
 
