@@ -1,6 +1,7 @@
 # Custom files
 src/index.js
 src/index.d.ts
+dist
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
