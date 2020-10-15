@@ -1,0 +1,23 @@
+{
+  "name": "avalanche-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "ts-node test/test.ts",
+    "generate": "ts-node scripts/generate.ts > src/index.ts",
+    "build": "tsc src/index.ts"
+  },
+  "author": "Federico Ginosa",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.8",
+    "@types/node-fetch": "^2.5.7",
+    "json-ts": "^1.6.4"
+  }
+}
