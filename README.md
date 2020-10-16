@@ -14,7 +14,7 @@ rpc.avm.getTx({ txID }).then((res: any) => {
 ```typescript
 import { wallet } from "avalanche-ts"
 
-const mnemonic = "chaos zoo actress bicycle pretty sad version crush sail trim found syrup wealth employ exercise sibling orange horn mail february display gasp donkey predict";
+const mnemonic = "chaos zoo actress bicycle pretty sad version crush sail trim found syrup wealth employ exercise...";
 const keysGenerator = wallet.keysGenerator({ mnemonic });
 const index = 0;
 console.log(keysGenerator(index));
