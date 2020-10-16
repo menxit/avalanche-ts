@@ -1,6 +1,6 @@
 {
   "name": "avalanche-ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "avalanche typescript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,11 @@
   "author": "Federico Ginosa",
   "license": "ISC",
   "dependencies": {
+    "bech32": "^1.1.4",
+    "bip39": "^3.0.2",
+    "create-hash": "^1.2.0",
+    "elliptic": "^6.5.3",
+    "hdkey": "^2.0.1",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
