@@ -19,3 +19,13 @@ const keysGenerator = wallet.keysGenerator({ mnemonic });
 const index = 0;
 console.log(keysGenerator(index));
 ```
+
+## Calculate rewards
+```typescript
+import { stats } from "avalanche-ts"
+
+stats.calculateReward({
+    stakedAmount: 2000*10**9,
+    durationInMs: 2592000000,
+}).then(rewards => console.log({ rewards }));
+```

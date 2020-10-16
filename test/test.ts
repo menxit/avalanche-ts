@@ -1,4 +1,4 @@
-import { rpc, wallet } from '../src'
+import { rpc, wallet, stats } from '../src'
 
 (async function main() {
 
@@ -12,5 +12,11 @@ import { rpc, wallet } from '../src'
 
   const xOutputs = await wallet.getXOutputs(keysGenerator);
   console.log({ xOutputs });
+
+  const rewards = await stats.calculateReward({
+    stakedAmount: 2000*10**9,
+    durationInMs: 2592000000,
+  });
+  console.log({ rewards });
 
 })();

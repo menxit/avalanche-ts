@@ -1366,7 +1366,7 @@ export class PlatformVM extends Rpc {
   /**
    * Add a validator to a Subnet other than
    * the Default Subnet. The validator must validate the
-   * Default Subnet for the entire duration they validate
+   * Default Subnet for the entire durationInMs they validate
    * this Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformaddnondefaultsubnetvalidator)
    */
