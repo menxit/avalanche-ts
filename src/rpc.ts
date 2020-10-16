@@ -8,64 +8,64 @@ const DEFAULT_OPTIONS_RPC = {
   url: "https://api.avax.network"
 };
 
-interface ImportKeyOptions {
+interface CChainImportKeyOptions {
     username?: string;
     password?: string;
     privateKey?: string;
 }
 
-interface ImportAVAXOptions {
+interface CChainImportAVAXOptions {
     to?: string;
     sourceChain?: string;
     username?: string;
     password?: string;
 }
 
-interface ExportAVAXOptions {
+interface CChainExportAVAXOptions {
     to?: string;
     amount?: number;
     username?: string;
     password?: string;
 }
 
-interface AliasOptions {
+interface AdminAliasOptions {
     alias?: string;
     endpoint?: string;
 }
 
-interface AliasChainOptions {
+interface AdminAliasChainOptions {
     chain?: string;
     alias?: string;
 }
 
-interface LockProfileOptions {
+interface AdminLockProfileOptions {
 }
 
-interface MemoryProfileOptions {
+interface AdminMemoryProfileOptions {
 }
 
-interface StartCPUProfilerOptions {
+interface AdminStartCPUProfilerOptions {
 }
 
-interface StopCPUProfilerOptions {
+interface AdminStopCPUProfilerOptions {
 }
 
-interface NewTokenOptions {
+interface AuthNewTokenOptions {
     password?: string;
     endpoints?: string[];
 }
 
-interface RevokeTokenOptions {
+interface AuthRevokeTokenOptions {
     password?: string;
     token?: string;
 }
 
-interface ChangePasswordOptions {
+interface AuthChangePasswordOptions {
     oldPassword?: string;
     newPassword?: string;
 }
 
-interface BuildGenesisOptions {
+interface AVMBuildGenesisOptions {
     genesisData?: IGenesisData;
 }
 interface IGenesisData {
@@ -95,12 +95,12 @@ interface IVariableCapItem {
     threshold?: number;
 }
 
-interface CreateAddressOptions {
+interface AVMCreateAddressOptions {
     username?: string;
     password?: string;
 }
 
-interface CreateFixedCapAssetOptions {
+interface AVMCreateFixedCapAssetOptions {
     name?: string;
     symbol?: string;
     denomination?: number;
@@ -115,7 +115,7 @@ interface IInitialHoldersItem {
     amount?: number;
 }
 
-interface CreateNFTAssetOptions {
+interface AVMCreateNFTAssetOptions {
     name?: string;
     symbol?: string;
     minterSets?: IMinterSetsItem[];
@@ -129,7 +129,7 @@ interface IMinterSetsItem {
     threshold?: number;
 }
 
-interface CreateVariableCapAssetOptions {
+interface AVMCreateVariableCapAssetOptions {
     name?: string;
     symbol?: string;
     denomination?: number;
@@ -144,7 +144,7 @@ interface IMinterSetsItem {
     threshold?: number;
 }
 
-interface ExportAVAXOptions {
+interface AVMExportAVAXOptions {
     from?: string[];
     to?: string;
     amount?: number;
@@ -154,61 +154,61 @@ interface ExportAVAXOptions {
     password?: string;
 }
 
-interface ExportKeyOptions {
+interface AVMExportKeyOptions {
     username?: string;
     password?: string;
     address?: string;
 }
 
-interface GetAllBalancesOptions {
+interface AVMGetAllBalancesOptions {
     address?: string;
 }
 
-interface GetAssetDescriptionOptions {
+interface AVMGetAssetDescriptionOptions {
     assetID?: string;
 }
 
-interface GetBalanceOptions {
+interface AVMGetBalanceOptions {
     address?: string;
     assetID?: string;
 }
 
-interface GetTxOptions {
+interface AVMGetTxOptions {
     txID?: string;
 }
 
-interface GetTxStatusOptions {
+interface AVMGetTxStatusOptions {
     txID?: string;
 }
 
-interface GetUTXOsOptions {
+interface AVMGetUTXOsOptions {
     addresses?: string[];
     limit?: number;
 }
 
-interface ImportAVAXOptions {
+interface AVMImportAVAXOptions {
     username?: string;
     password?: string;
     sourceChain?: string;
     to?: string;
 }
 
-interface ImportKeyOptions {
+interface AVMImportKeyOptions {
     username?: string;
     password?: string;
     privateKey?: string;
 }
 
-interface IssueTxOptions {
+interface AVMIssueTxOptions {
     tx?: string;
 }
 
-interface ListAddressesOptions {
+interface AVMListAddressesOptions {
     username?: string;
     password?: string;
 }
 
-interface MintOptions {
+interface AVMMintOptions {
     amount?: number;
     assetID?: string;
     from?: string[];
@@ -219,7 +219,7 @@ interface MintOptions {
     password?: string;
 }
 
-interface MintNFTOptions {
+interface AVMMintNFTOptions {
     assetID?: string;
     payload?: string;
     from?: string[];
@@ -230,7 +230,7 @@ interface MintNFTOptions {
     password?: string;
 }
 
-interface SendOptions {
+interface AVMSendOptions {
     assetID?: string;
     amount?: number;
     from?: string[];
@@ -241,7 +241,7 @@ interface SendOptions {
     password?: string;
 }
 
-interface SendMultipleOptions {
+interface AVMSendMultipleOptions {
     outputs?: IOutputsItem[];
     from?: string[];
     changeAddr?: string;
@@ -255,7 +255,7 @@ interface IOutputsItem {
     amount?: number;
 }
 
-interface SendNFTOptions {
+interface AVMSendNFTOptions {
     assetID?: string;
     from?: string[];
     to?: string;
@@ -265,15 +265,15 @@ interface SendNFTOptions {
     password?: string;
 }
 
-type EthCallOptions = any[];
+type EVMEthCallOptions = any[];
 interface IRootObjectItem {
     to?: string;
     data?: string;
 }
 
-type EthGetBalanceOptions = string[];
+type EVMEthGetBalanceOptions = string[];
 
-type EthSignTransactionOptions = IRootObjectItem[];
+type EVMEthSignTransactionOptions = IRootObjectItem[];
 interface IRootObjectItem {
     from?: string;
     to?: string;
@@ -283,19 +283,19 @@ interface IRootObjectItem {
     value?: string;
 }
 
-type EthGetTransactionCountOptions = string[];
+type EVMEthGetTransactionCountOptions = string[];
 
-type EthSendRawTransactionOptions = string[];
+type EVMEthSendRawTransactionOptions = string[];
 
-type EthGetBlockByHashOptions = (string | boolean)[];
+type EVMEthGetBlockByHashOptions = (string | boolean)[];
 
-type EthGetBlockByNumberOptions = (string | boolean)[];
+type EVMEthGetBlockByNumberOptions = (string | boolean)[];
 
-type EthGetTransactionByHashOptions = string[];
+type EVMEthGetTransactionByHashOptions = string[];
 
-type EthGetTransactionReceiptOptions = string[];
+type EVMEthGetTransactionReceiptOptions = string[];
 
-interface ExportAVAXOptions {
+interface EVMExportAVAXOptions {
     from?: string[];
     to?: string;
     amount?: number;
@@ -305,89 +305,89 @@ interface ExportAVAXOptions {
     password?: string;
 }
 
-interface ExportKeyOptions {
+interface EVMExportKeyOptions {
     username?: string;
     password?: string;
     address?: string;
 }
 
-interface ImportAVAXOptions {
+interface EVMImportAVAXOptions {
     username?: string;
     password?: string;
     sourceChain?: string;
     to?: string;
 }
 
-interface ImportKeyOptions {
+interface EVMImportKeyOptions {
     username?: string;
     password?: string;
     privateKey?: string;
 }
 
-type PersonalNewAccountOptions = string[];
+type EVMPersonalNewAccountOptions = string[];
 
-type PersonalImportRawKeyOptions = string[];
+type EVMPersonalImportRawKeyOptions = string[];
 
-type PersonalUnlockAccountOptions = (string | number)[];
+type EVMPersonalUnlockAccountOptions = (string | number)[];
 
-type Web3Sha3Options = string[];
+type EVMWeb3Sha3Options = string[];
 
-interface GetBlockchainIDOptions {
+interface InfoGetBlockchainIDOptions {
     alias?: string;
 }
 
-interface GetNetworkIDOptions {
+interface InfoGetNetworkIDOptions {
 }
 
-interface GetNetworkNameOptions {
+interface InfoGetNetworkNameOptions {
 }
 
-interface GetNodeIDOptions {
+interface InfoGetNodeIDOptions {
 }
 
-interface GetNodeVersionOptions {
+interface InfoGetNodeVersionOptions {
 }
 
-interface IsBootstrappedOptions {
+interface InfoIsBootstrappedOptions {
     chain?: string;
 }
 
-interface GetTxFeeOptions {
+interface InfoGetTxFeeOptions {
 }
 
-interface PeersOptions {
+interface InfoPeersOptions {
 }
 
-interface PublishBlockchainOptions {
+interface IPCPublishBlockchainOptions {
     blockchainID?: string;
 }
 
-interface UnpublishBlockchainOptions {
+interface IPCUnpublishBlockchainOptions {
     blockchainID?: string;
 }
 
-interface CreateUserOptions {
+interface KeystoreCreateUserOptions {
     username?: string;
     password?: string;
 }
 
-interface DeleteUserOptions {
+interface KeystoreDeleteUserOptions {
     username?: string;
     password?: string;
 }
 
-interface ExportUserOptions {
+interface KeystoreExportUserOptions {
     username?: string;
     password?: string;
 }
 
-interface ImportUserOptions {
+interface KeystoreImportUserOptions {
     username?: string;
     password?: string;
     user?: string;
 }
 
-interface AddDelegatorOptions {
+interface PlatformVMAddDelegatorOptions {
     nodeId?: string;
     startTime?: number;
     endTime?: number;
@@ -397,7 +397,7 @@ interface AddDelegatorOptions {
     password?: string;
 }
 
-interface AddValidatorOptions {
+interface PlatformVMAddValidatorOptions {
     nodeID?: string;
     startTime?: number;
     endTime?: number;
@@ -408,7 +408,7 @@ interface AddValidatorOptions {
     password?: string;
 }
 
-interface AddSubnetValidatorOptions {
+interface PlatformVMAddSubnetValidatorOptions {
     nodeID?: string;
     subnetID?: string;
     startTime?: number;
@@ -418,12 +418,12 @@ interface AddSubnetValidatorOptions {
     password?: string;
 }
 
-interface CreateAddressOptions {
+interface PlatformVMCreateAddressOptions {
     username?: string;
     password?: string;
 }
 
-interface CreateBlockchainOptions {
+interface PlatformVMCreateBlockchainOptions {
     vmID?: string;
     SubnetID?: string;
     name?: string;
@@ -432,109 +432,109 @@ interface CreateBlockchainOptions {
     password?: string;
 }
 
-interface CreateSubnetOptions {
+interface PlatformVMCreateSubnetOptions {
     controlKeys?: string[];
     threshold?: number;
     username?: string;
     password?: string;
 }
 
-interface GetBalanceOptions {
+interface PlatformVMGetBalanceOptions {
     address?: string;
 }
 
-interface GetBlockchainsOptions {
+interface PlatformVMGetBlockchainsOptions {
 }
 
-interface GetBlockchainStatusOptions {
+interface PlatformVMGetBlockchainStatusOptions {
     blockchainID?: string;
 }
 
-interface GetCurrentSupplyOptions {
+interface PlatformVMGetCurrentSupplyOptions {
 }
 
-interface GetCurrentValidatorsOptions {
+interface PlatformVMGetCurrentValidatorsOptions {
     subnetID?: string;
 }
 
-interface GetHeightOptions {
+interface PlatformVMGetHeightOptions {
 }
 
-interface GetMinStakeOptions {
+interface PlatformVMGetMinStakeOptions {
 }
 
-interface GetStakeOptions {
+interface PlatformVMGetStakeOptions {
     addresses?: string[];
 }
 
-interface GetTxStatusOptions {
+interface PlatformVMGetTxStatusOptions {
     txID?: string;
 }
 
-interface GetPendingValidatorsOptions {
+interface PlatformVMGetPendingValidatorsOptions {
     subnetID?: string;
 }
 
-interface GetStakingAssetIDOptions {
+interface PlatformVMGetStakingAssetIDOptions {
 }
 
-interface GetSubnetsOptions {
+interface PlatformVMGetSubnetsOptions {
 }
 
-interface GetTxOptions {
+interface PlatformVMGetTxOptions {
     txID?: string;
 }
 
-interface GetUTXOsOptions {
+interface PlatformVMGetUTXOsOptions {
     addresses?: string[];
     sourceChain?: string;
     limit?: number;
 }
 
-interface ExportAVAXOptions {
+interface PlatformVMExportAVAXOptions {
     to?: string;
     amount?: number;
     username?: string;
     password?: string;
 }
 
-interface ExportKeyOptions {
+interface PlatformVMExportKeyOptions {
     username?: string;
     password?: string;
     address?: string;
 }
 
-interface ImportAVAXOptions {
+interface PlatformVMImportAVAXOptions {
     username?: string;
     password?: string;
     sourceChain?: string;
     to?: string;
 }
 
-interface ImportKeyOptions {
+interface PlatformVMImportKeyOptions {
     username?: string;
     password?: string;
     privateKey?: string;
 }
 
-interface IssueTxOptions {
+interface PlatformVMIssueTxOptions {
     tx?: string;
 }
 
-interface ListAddressesOptions {
+interface PlatformVMListAddressesOptions {
     username?: string;
     password?: string;
 }
 
-interface SampleValidatorsOptions {
+interface PlatformVMSampleValidatorsOptions {
     size?: number;
 }
 
-interface ValidatedByOptions {
+interface PlatformVMValidatedByOptions {
     blockchainID?: string;
 }
 
-interface ValidatesOptions {
+interface PlatformVMValidatesOptions {
     subnetID?: string;
 }
 
@@ -588,7 +588,7 @@ export class CChain extends Rpc {
   /**
    * Import private key cchain.
    */
-  importKey(options: ImportKeyOptions) {
+  importKey(options: CChainImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importKey", params: options });
   }
   
@@ -597,7 +597,7 @@ export class CChain extends Rpc {
   /**
    * Import avax from xchain to cchain.
    */
-  importAVAX(options: ImportAVAXOptions) {
+  importAVAX(options: CChainImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importAVAX", params: options });
   }
   
@@ -606,7 +606,7 @@ export class CChain extends Rpc {
   /**
    * Export avax from cchain to xchain.
    */
-  exportAVAX(options: ExportAVAXOptions) {
+  exportAVAX(options: CChainExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
   }
   
@@ -629,7 +629,7 @@ export class Admin extends Rpc {
    * nodes will not know about this alias.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminalias)
    */
-  alias(options: AliasOptions) {
+  alias(options: AdminAliasOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.alias", params: options });
   }
   
@@ -641,7 +641,7 @@ export class Admin extends Rpc {
    * ID is used.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminaliaschain)
    */
-  aliasChain(options: AliasChainOptions) {
+  aliasChain(options: AdminAliasChainOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.aliasChain", params: options });
   }
   
@@ -652,7 +652,7 @@ export class Admin extends Rpc {
    * the specified file.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminlockprofile)
    */
-  lockProfile(options: LockProfileOptions) {
+  lockProfile(options: AdminLockProfileOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.lockProfile", params: options });
   }
   
@@ -663,7 +663,7 @@ export class Admin extends Rpc {
    * file.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminmemoryprofile)
    */
-  memoryProfile(options: MemoryProfileOptions) {
+  memoryProfile(options: AdminMemoryProfileOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.memoryProfile", params: options });
   }
   
@@ -675,7 +675,7 @@ export class Admin extends Rpc {
    * on stop.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminstartcpuprofiler)
    */
-  startCPUProfiler(options: StartCPUProfilerOptions) {
+  startCPUProfiler(options: AdminStartCPUProfilerOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.startCPUProfiler", params: options });
   }
   
@@ -685,7 +685,7 @@ export class Admin extends Rpc {
    * Stop the CPU profile that was previously started.
    * @url(https://docs.avax.network/v1.0/en/api/admin/#adminstopcpuprofiler)
    */
-  stopCPUProfiler(options: StopCPUProfilerOptions) {
+  stopCPUProfiler(options: AdminStopCPUProfilerOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.stopCPUProfiler", params: options });
   }
   
@@ -705,7 +705,7 @@ export class Auth extends Rpc {
    * Creates a new authorization token that grants access
    * to one or more API endpoints. (https://docs.avax.network/v1.0/en/api/auth/#authnewtoken)
    */
-  newToken(options: NewTokenOptions) {
+  newToken(options: AuthNewTokenOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.newToken", params: options });
   }
   
@@ -717,7 +717,7 @@ export class Auth extends Rpc {
    * the token is invalid, does nothing.
    * @url(https://docs.avax.network/v1.0/en/api/auth/#authrevoketoken)
    */
-  revokeToken(options: RevokeTokenOptions) {
+  revokeToken(options: AuthRevokeTokenOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.revokeToken", params: options });
   }
   
@@ -729,7 +729,7 @@ export class Auth extends Rpc {
    * invalid.
    * @url(https://docs.avax.network/v1.0/en/api/auth/#authchangepassword)
    */
-  changePassword(options: ChangePasswordOptions) {
+  changePassword(options: AuthChangePasswordOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.changePassword", params: options });
   }
   
@@ -753,7 +753,7 @@ export class AVM extends Rpc {
    * user.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreateaddress)
    */
-  createAddress(options: CreateAddressOptions) {
+  createAddress(options: AVMCreateAddressOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createAddress", params: options });
   }
   
@@ -766,7 +766,7 @@ export class AVM extends Rpc {
    * be sent with `avm.send`.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatefixedcapasset)
    */
-  createFixedCapAsset(options: CreateFixedCapAssetOptions) {
+  createFixedCapAsset(options: AVMCreateFixedCapAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createFixedCapAsset", params: options });
   }
   
@@ -779,7 +779,7 @@ export class AVM extends Rpc {
    * The asset can be sent with `avm.sendNFT`.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatenftasset)
    */
-  createNFTAsset(options: CreateNFTAssetOptions) {
+  createNFTAsset(options: AVMCreateNFTAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createNFTAsset", params: options });
   }
   
@@ -793,7 +793,7 @@ export class AVM extends Rpc {
    * `avm.send`.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatevariablecapasset)
    */
-  createVariableCapAsset(options: CreateVariableCapAssetOptions) {
+  createVariableCapAsset(options: AVMCreateVariableCapAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createVariableCapAsset", params: options });
   }
   
@@ -807,7 +807,7 @@ export class AVM extends Rpc {
    * `importAVAX` method to complete the transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
    */
-  exportAVAX(options: ExportAVAXOptions) {
+  exportAVAX(options: AVMExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportAVAX", params: options });
   }
   
@@ -819,7 +819,7 @@ export class AVM extends Rpc {
    * a user with `avm.importKey`.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportkey)
    */
-  exportKey(options: ExportKeyOptions) {
+  exportKey(options: AVMExportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportKey", params: options });
   }
   
@@ -830,7 +830,7 @@ export class AVM extends Rpc {
    * a given address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetallbalances)
    */
-  getAllBalances(options: GetAllBalancesOptions) {
+  getAllBalances(options: AVMGetAllBalancesOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getAllBalances", params: options });
   }
   
@@ -840,7 +840,7 @@ export class AVM extends Rpc {
    * Get information about an asset.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetassetdescription)
    */
-  getAssetDescription(options: GetAssetDescriptionOptions) {
+  getAssetDescription(options: AVMGetAssetDescriptionOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getAssetDescription", params: options });
   }
@@ -852,7 +852,7 @@ export class AVM extends Rpc {
    * a given address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
    */
-  getBalance(options: GetBalanceOptions) {
+  getBalance(options: AVMGetBalanceOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/X", method: "avm.getBalance", params: options });
   }
@@ -862,7 +862,7 @@ export class AVM extends Rpc {
   /**
    * Returns the specified transaction @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
    */
-  getTx(options: GetTxOptions) {
+  getTx(options: AVMGetTxOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getTx", params: options });
   }
   
@@ -873,7 +873,7 @@ export class AVM extends Rpc {
    * the network.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgettxstatus)
    */
-  getTxStatus(options: GetTxStatusOptions) {
+  getTxStatus(options: AVMGetTxStatusOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getTxStatus", params: options });
   }
   
@@ -883,7 +883,7 @@ export class AVM extends Rpc {
    * Get the UTXOs that reference a given address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetutxos)
    */
-  getUTXOs(options: GetUTXOsOptions) {
+  getUTXOs(options: AVMGetUTXOsOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getUTXOs", params: options });
   }
   
@@ -897,7 +897,7 @@ export class AVM extends Rpc {
    * C-Chain’s `exportAVAX` method to initiate the transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportavax)
    */
-  importAVAX(options: ImportAVAXOptions) {
+  importAVAX(options: AVMImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.importAVAX", params: options });
   }
   
@@ -908,7 +908,7 @@ export class AVM extends Rpc {
    * providing the private key that controls the address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
    */
-  importKey(options: ImportKeyOptions) {
+  importKey(options: AVMImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.importKey", params: options });
   }
   
@@ -918,7 +918,7 @@ export class AVM extends Rpc {
    * Send a signed transaction to the network.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmissuetx)
    */
-  issueTx(options: IssueTxOptions) {
+  issueTx(options: AVMIssueTxOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.issueTx", params: options });
   }
   
@@ -928,7 +928,7 @@ export class AVM extends Rpc {
    * List addresses controlled by the given user.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmlistaddresses)
    */
-  listAddresses(options: ListAddressesOptions) {
+  listAddresses(options: AVMListAddressesOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.listAddresses", params: options });
   }
   
@@ -939,7 +939,7 @@ export class AVM extends Rpc {
    * a variable-cap asset (an asset created with `avm.createVariableCapAsset`.)
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreateminttx)
    */
-  mint(options: MintOptions) {
+  mint(options: AVMMintOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.mint", params: options });
   }
@@ -950,7 +950,7 @@ export class AVM extends Rpc {
    * Mint more of a non-fungible asset (an asset
    * created with `avm.createNFTAsset`.) @url(https://docs.avax.network/v1.0/en/api/avm/#avmmintnft)
    */
-  mintNFT(options: MintNFTOptions) {
+  mintNFT(options: AVMMintNFTOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.mintNFT", params: options });
   }
@@ -962,7 +962,7 @@ export class AVM extends Rpc {
    * address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
    */
-  send(options: SendOptions) {
+  send(options: AVMSendOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.send", params: options });
   }
@@ -974,7 +974,7 @@ export class AVM extends Rpc {
    * address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
    */
-  sendMultiple(options: SendMultipleOptions) {
+  sendMultiple(options: AVMSendMultipleOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.sendMultiple", params: options });
   }
   
@@ -985,7 +985,7 @@ export class AVM extends Rpc {
    * address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
    */
-  sendNFT(options: SendNFTOptions) {
+  sendNFT(options: AVMSendNFTOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.sendNFT", params: options });
   }
@@ -1022,7 +1022,7 @@ export class EVM extends Rpc {
    * Call a contract.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#call-a-contract)
    */
-  eth_call(options: EthCallOptions) {
+  eth_call(options: EVMEthCallOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_call", params: options });
   }
   
@@ -1043,7 +1043,7 @@ export class EVM extends Rpc {
    * Getting an account’s balance.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-balance)
    */
-  eth_getBalance(options: EthGetBalanceOptions) {
+  eth_getBalance(options: EVMEthGetBalanceOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBalance", params: options });
   }
   
@@ -1056,7 +1056,7 @@ export class EVM extends Rpc {
    * be used with `eth_sendRawTransaction` to execute the transaction.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#signing-a-transaction)
    */
-  eth_signTransaction(options: EthSignTransactionOptions) {
+  eth_signTransaction(options: EVMEthSignTransactionOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_signTransaction", params: options });
   }
   
@@ -1066,7 +1066,7 @@ export class EVM extends Rpc {
    * Getting an account’s nonce.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-nonce)
    */
-  eth_getTransactionCount(options: EthGetTransactionCountOptions) {
+  eth_getTransactionCount(options: EVMEthGetTransactionCountOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionCount", params: options });
   }
   
@@ -1078,7 +1078,7 @@ export class EVM extends Rpc {
    * transaction hash.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#send-a-raw-transaction)
    */
-  eth_sendRawTransaction(options: EthSendRawTransactionOptions) {
+  eth_sendRawTransaction(options: EVMEthSendRawTransactionOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_sendRawTransaction", params: options });
   }
   
@@ -1088,7 +1088,7 @@ export class EVM extends Rpc {
    * Getting a block by hash.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-block-by-hash)
    */
-  eth_getBlockByHash(options: EthGetBlockByHashOptions) {
+  eth_getBlockByHash(options: EVMEthGetBlockByHashOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBlockByHash", params: options });
   }
   
@@ -1098,7 +1098,7 @@ export class EVM extends Rpc {
    * Getting a block by number.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-block-by-number)
    */
-  eth_getBlockByNumber(options: EthGetBlockByNumberOptions) {
+  eth_getBlockByNumber(options: EVMEthGetBlockByNumberOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBlockByNumber", params: options });
   }
   
@@ -1108,7 +1108,7 @@ export class EVM extends Rpc {
    * Getting a transaction by hash.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-transaction-by-hash)
    */
-  eth_getTransactionByHash(options: EthGetTransactionByHashOptions) {
+  eth_getTransactionByHash(options: EVMEthGetTransactionByHashOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionByHash", params: options });
   }
   
@@ -1118,7 +1118,7 @@ export class EVM extends Rpc {
    * Getting a transaction receipt.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-transaction-receipt)
    */
-  eth_getTransactionReceipt(options: EthGetTransactionReceiptOptions) {
+  eth_getTransactionReceipt(options: EVMEthGetTransactionReceiptOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionReceipt", params: options });
   }
   
@@ -1131,7 +1131,7 @@ export class EVM extends Rpc {
    * transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
    */
-  exportAVAX(options: ExportAVAXOptions) {
+  exportAVAX(options: EVMExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
   }
   
@@ -1143,7 +1143,7 @@ export class EVM extends Rpc {
    * a user with `avm.importKey`.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportkey)
    */
-  exportKey(options: ExportKeyOptions) {
+  exportKey(options: EVMExportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportKey", params: options });
   }
   
@@ -1156,7 +1156,7 @@ export class EVM extends Rpc {
    * transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
    */
-  importAVAX(options: ImportAVAXOptions) {
+  importAVAX(options: EVMImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importAVAX", params: options });
   }
   
@@ -1167,7 +1167,7 @@ export class EVM extends Rpc {
    * providing the private key that controls the address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
    */
-  importKey(options: ImportKeyOptions) {
+  importKey(options: EVMImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importKey", params: options });
   }
   
@@ -1198,7 +1198,7 @@ export class EVM extends Rpc {
    * is more suitable for quick account creation for
    * a testnet.
    */
-  personal_newAccount(options: PersonalNewAccountOptions) {
+  personal_newAccount(options: EVMPersonalNewAccountOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_newAccount", params: options });
   }
   
@@ -1216,7 +1216,7 @@ export class EVM extends Rpc {
    * otherwise the EVM will throw an error. The
    * example response returns the associated public key.
    */
-  personal_importRawKey(options: PersonalImportRawKeyOptions) {
+  personal_importRawKey(options: EVMPersonalImportRawKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_importRawKey", params: options });
   }
   
@@ -1240,7 +1240,7 @@ export class EVM extends Rpc {
    * passphrase `cheese` must be provided for authorization.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#unlocking-an-account)
    */
-  personal_unlockAccount(options: PersonalUnlockAccountOptions) {
+  personal_unlockAccount(options: EVMPersonalUnlockAccountOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_unlockAccount", params: options });
   }
   
@@ -1279,7 +1279,7 @@ export class EVM extends Rpc {
    * bytes.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#calculate-a-cryptographic-hash)
    */
-  web3_sha3(options: Web3Sha3Options) {
+  web3_sha3(options: EVMWeb3Sha3Options) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "web3_sha3", params: options });
   }
   
@@ -1318,7 +1318,7 @@ export class Info extends Rpc {
    * Given a blockchain’s alias, get its ID.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogetblockchainid)
    */
-  getBlockchainID(options: GetBlockchainIDOptions) {
+  getBlockchainID(options: InfoGetBlockchainIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getBlockchainID", params: options });
   }
   
@@ -1329,7 +1329,7 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnetworkid)
    */
-  getNetworkID(options: GetNetworkIDOptions) {
+  getNetworkID(options: InfoGetNetworkIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNetworkID", params: options });
   }
   
@@ -1340,7 +1340,7 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnetworkname)
    */
-  getNetworkName(options: GetNetworkNameOptions) {
+  getNetworkName(options: InfoGetNetworkNameOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNetworkName", params: options });
   }
   
@@ -1351,7 +1351,7 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnodeid)
    */
-  getNodeID(options: GetNodeIDOptions) {
+  getNodeID(options: InfoGetNodeIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNodeID", params: options });
   }
   
@@ -1361,7 +1361,7 @@ export class Info extends Rpc {
    * Get the version of this node.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnodeversion)
    */
-  getNodeVersion(options: GetNodeVersionOptions) {
+  getNodeVersion(options: InfoGetNodeVersionOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNodeVersion", params: options });
   }
   
@@ -1371,7 +1371,7 @@ export class Info extends Rpc {
    * Check whether a given chain is done bootstrapping.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infoisbootstrapped)
    */
-  isBootstrapped(options: IsBootstrappedOptions) {
+  isBootstrapped(options: InfoIsBootstrappedOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.isBootstrapped", params: options });
   }
   
@@ -1381,7 +1381,7 @@ export class Info extends Rpc {
    * Get the transaction fee of the network.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogettxfee)
    */
-  getTxFee(options: GetTxFeeOptions) {
+  getTxFee(options: InfoGetTxFeeOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getTxFee", params: options });
   }
   
@@ -1391,7 +1391,7 @@ export class Info extends Rpc {
    * Get description of peer connections.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infopeers)
    */
-  peers(options: PeersOptions) {
+  peers(options: InfoPeersOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.peers", params: options });
   }
   
@@ -1416,7 +1416,7 @@ export class IPC extends Rpc {
    * to a Unix domain socket.
    * @url(https://docs.avax.network/v1.0/en/api/ipc/#ipcspublishblockchain)
    */
-  publishBlockchain(options: PublishBlockchainOptions) {
+  publishBlockchain(options: IPCPublishBlockchainOptions) {
     return this.fetch({ endpoint: "ext/ipcs", method: "ipcs.publishBlockchain", params: options });
   }
   
@@ -1427,7 +1427,7 @@ export class IPC extends Rpc {
    * publishes to a Unix domain socket.
    * @url(https://docs.avax.network/v1.0/en/api/ipc/#ipcspublishblockchain)
    */
-  unpublishBlockchain(options: UnpublishBlockchainOptions) {
+  unpublishBlockchain(options: IPCUnpublishBlockchainOptions) {
     return this.fetch({ endpoint: "ext/ipcs", method: "ipcs.unpublishBlockchain", params: options });
   }
   
@@ -1455,7 +1455,7 @@ export class Keystore extends Rpc {
    * and password.
    * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystorecreateuser)
    */
-  createUser(options: CreateUserOptions) {
+  createUser(options: KeystoreCreateUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.createUser", params: options });
   }
   
@@ -1465,7 +1465,7 @@ export class Keystore extends Rpc {
    * Delete a user.
    * @url(https://docs.avax.network/v1.0/en/api/keystore/#kesytoredeleteuser)
    */
-  deleteUser(options: DeleteUserOptions) {
+  deleteUser(options: KeystoreDeleteUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.deleteUser", params: options });
   }
   
@@ -1477,7 +1477,7 @@ export class Keystore extends Rpc {
    * remains encrypted.
    * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystoreexportuser)
    */
-  exportUser(options: ExportUserOptions) {
+  exportUser(options: KeystoreExportUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.exportUser", params: options });
   }
   
@@ -1489,7 +1489,7 @@ export class Keystore extends Rpc {
    * `user` had when it was exported.
    * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystoreimportuser)
    */
-  importUser(options: ImportUserOptions) {
+  importUser(options: KeystoreImportUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.importUser", params: options });
   }
   
@@ -1540,7 +1540,7 @@ export class PlatformVM extends Rpc {
    * delegatee validates the Default Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformadddefaultsubnetdelegator)
    */
-  addDelegator(options: AddDelegatorOptions) {
+  addDelegator(options: PlatformVMAddDelegatorOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.addDelegator", params: options });
   }
   
@@ -1550,7 +1550,7 @@ export class PlatformVM extends Rpc {
    * Add a validator to the Default Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformadddefaultsubnetvalidator)
    */
-  addValidator(options: AddValidatorOptions) {
+  addValidator(options: PlatformVMAddValidatorOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.addValidator", params: options });
   }
   
@@ -1563,7 +1563,7 @@ export class PlatformVM extends Rpc {
    * this Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformaddnondefaultsubnetvalidator)
    */
-  addSubnetValidator(options: AddSubnetValidatorOptions) {
+  addSubnetValidator(options: PlatformVMAddSubnetValidatorOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.addSubnetValidator", params: options });
   }
   
@@ -1582,7 +1582,7 @@ export class PlatformVM extends Rpc {
    * delegatee validates the Default Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformadddefaultsubnetdelegator)
    */
-  createAddress(options: CreateAddressOptions) {
+  createAddress(options: PlatformVMCreateAddressOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.createAddress", params: options });
   }
   
@@ -1594,7 +1594,7 @@ export class PlatformVM extends Rpc {
    * Timestamp VM.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformcreateblockchain)
    */
-  createBlockchain(options: CreateBlockchainOptions) {
+  createBlockchain(options: PlatformVMCreateBlockchainOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.createBlockchain", params: options });
   }
   
@@ -1609,7 +1609,7 @@ export class PlatformVM extends Rpc {
    * when issuing the signed transaction.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformcreatesubnet)
    */
-  createSubnet(options: CreateSubnetOptions) {
+  createSubnet(options: PlatformVMCreateSubnetOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.createSubnet", params: options });
   }
   
@@ -1620,7 +1620,7 @@ export class PlatformVM extends Rpc {
    * a given address.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetbalance)
    */
-  getBalance(options: GetBalanceOptions) {
+  getBalance(options: PlatformVMGetBalanceOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBalance", params: options });
   }
   
@@ -1631,7 +1631,7 @@ export class PlatformVM extends Rpc {
    * P-Chain).
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetblockchains)
    */
-  getBlockchains(options: GetBlockchainsOptions) {
+  getBlockchains(options: PlatformVMGetBlockchainsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBlockchains", params: options });
   }
   
@@ -1641,7 +1641,7 @@ export class PlatformVM extends Rpc {
    * Get the status of a blockchain.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetblockchainstatus)
    */
-  getBlockchainStatus(options: GetBlockchainStatusOptions) {
+  getBlockchainStatus(options: PlatformVMGetBlockchainStatusOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBlockchainStatus", params: options });
   }
   
@@ -1654,7 +1654,7 @@ export class PlatformVM extends Rpc {
    * including transaction fees.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetcurrentsupply)
    */
-  getCurrentSupply(options: GetCurrentSupplyOptions) {
+  getCurrentSupply(options: PlatformVMGetCurrentSupplyOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getCurrentSupply", params: options });
   }
   
@@ -1664,7 +1664,7 @@ export class PlatformVM extends Rpc {
    * List the current validators of the given Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetcurrentvalidators)
    */
-  getCurrentValidators(options: GetCurrentValidatorsOptions) {
+  getCurrentValidators(options: PlatformVMGetCurrentValidatorsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getCurrentValidators", params: options });
   }
   
@@ -1674,7 +1674,7 @@ export class PlatformVM extends Rpc {
    * Returns the height of the last accepted block
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetheight)
    */
-  getHeight(options: GetHeightOptions) {
+  getHeight(options: PlatformVMGetHeightOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStakingAssetID", params: options });
   }
   
@@ -1683,7 +1683,7 @@ export class PlatformVM extends Rpc {
   /**
    * Returns the minimum stake amount @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetminstake)
    */
-  getMinStake(options: GetMinStakeOptions) {
+  getMinStake(options: PlatformVMGetMinStakeOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getMinStake", params: options });
   }
   
@@ -1693,7 +1693,7 @@ export class PlatformVM extends Rpc {
    * Returns the staked amount for an array of
    * addresses @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetstake)
    */
-  getStake(options: GetStakeOptions) {
+  getStake(options: PlatformVMGetStakeOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStake", params: options });
   }
   
@@ -1702,7 +1702,7 @@ export class PlatformVM extends Rpc {
   /**
    * Returns the status of a platform chain transaction.
    */
-  getTxStatus(options: GetTxStatusOptions) {
+  getTxStatus(options: PlatformVMGetTxStatusOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getTxStatus", params: options });
   }
   
@@ -1715,7 +1715,7 @@ export class PlatformVM extends Rpc {
    * future.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetpendingvalidators)
    */
-  getPendingValidators(options: GetPendingValidatorsOptions) {
+  getPendingValidators(options: PlatformVMGetPendingValidatorsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getPendingValidators", params: options });
   }
   
@@ -1727,7 +1727,7 @@ export class PlatformVM extends Rpc {
    * assetID.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetstakingassetid)
    */
-  getStakingAssetID(options: GetStakingAssetIDOptions) {
+  getStakingAssetID(options: PlatformVMGetStakingAssetIDOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStakingAssetID", params: options });
   }
   
@@ -1737,7 +1737,7 @@ export class PlatformVM extends Rpc {
    * Get all the Subnets that exist.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetsubnets)
    */
-  getSubnets(options: GetSubnetsOptions) {
+  getSubnets(options: PlatformVMGetSubnetsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getSubnets", params: options });
   }
   
@@ -1746,7 +1746,7 @@ export class PlatformVM extends Rpc {
   /**
    * Returns the specified transaction @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
    */
-  getTx(options: GetTxOptions) {
+  getTx(options: PlatformVMGetTxOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getTx", params: options });
   }
   
@@ -1756,7 +1756,7 @@ export class PlatformVM extends Rpc {
    * Get the UTXOs that reference a given address.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetutxos)
    */
-  getUTXOs(options: GetUTXOsOptions) {
+  getUTXOs(options: PlatformVMGetUTXOsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getUTXOs", params: options });
   }
   
@@ -1772,7 +1772,7 @@ export class PlatformVM extends Rpc {
    * the transfer.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformexportavax)
    */
-  exportAVAX(options: ExportAVAXOptions) {
+  exportAVAX(options: PlatformVMExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.exportAVAX", params: options });
   }
   
@@ -1784,7 +1784,7 @@ export class PlatformVM extends Rpc {
    * a user with `platform.importKey`.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformexportkey)
    */
-  exportKey(options: ExportKeyOptions) {
+  exportKey(options: PlatformVMExportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.exportKey", params: options });
   }
   
@@ -1796,7 +1796,7 @@ export class PlatformVM extends Rpc {
    * must call the X-Chain’s `exportAVAX` method to initiate
    * the transfer. [More Info](https://docs.avax.network/v1.0/en/api/platform/#avmimportava)
    */
-  importAVAX(options: ImportAVAXOptions) {
+  importAVAX(options: PlatformVMImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.importAVAX", params: options });
   }
   
@@ -1807,7 +1807,7 @@ export class PlatformVM extends Rpc {
    * providing the private key that controls the address.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformimportkey)
    */
-  importKey(options: ImportKeyOptions) {
+  importKey(options: PlatformVMImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.importKey", params: options });
   }
   
@@ -1817,7 +1817,7 @@ export class PlatformVM extends Rpc {
    * Issue a transaction to the Platform Chain.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformissuetx)
    */
-  issueTx(options: IssueTxOptions) {
+  issueTx(options: PlatformVMIssueTxOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.issueTx", params: options });
   }
   
@@ -1827,7 +1827,7 @@ export class PlatformVM extends Rpc {
    * List the addresses controlled by the given user.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformlistaddresses)
    */
-  listAddresses(options: ListAddressesOptions) {
+  listAddresses(options: PlatformVMListAddressesOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.listAddresses", params: options });
   }
   
@@ -1837,7 +1837,7 @@ export class PlatformVM extends Rpc {
    * Sample validators from the specified Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformsamplevalidators)
    */
-  sampleValidators(options: SampleValidatorsOptions) {
+  sampleValidators(options: PlatformVMSampleValidatorsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.sampleValidators", params: options });
   }
   
@@ -1847,7 +1847,7 @@ export class PlatformVM extends Rpc {
    * Get the Subnet that validates a given blockchain.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformvalidatedby)
    */
-  validatedBy(options: ValidatedByOptions) {
+  validatedBy(options: PlatformVMValidatedByOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.validatedBy", params: options });
   }
   
@@ -1858,7 +1858,7 @@ export class PlatformVM extends Rpc {
    * validates.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformvalidates)
    */
-  validates(options: ValidatesOptions) {
+  validates(options: PlatformVMValidatesOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.validates", params: options });
   }
   

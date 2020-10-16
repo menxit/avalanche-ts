@@ -224,7 +224,7 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
         let containsAssetID = false;
         if (res.params !== null) {
           let type = json2ts(JSON.stringify(res.params));
-          const typeName = capitalizeFirstLetter(i.name)+"Options"
+          const typeName = curr.name+capitalizeFirstLetter(i.name)+"Options"
           parameters = `options: ${typeName}`;
           type = type.replace("IRootObject", typeName);
           type = type.split(":").join("?:").split("??").join("?")
