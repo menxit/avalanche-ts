@@ -470,7 +470,8 @@ export class Rpc {
 
 }
 
-export const ASSET_ID_AVAX = "ASSET_ID_AVAX";
+export const ASSET_ID_AVAX = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z";
+
 /**
  * This API can be used for measuring node
  * health and debugging.
@@ -1366,7 +1367,7 @@ export class PlatformVM extends Rpc {
   /**
    * Add a validator to a Subnet other than
    * the Default Subnet. The validator must validate the
-   * Default Subnet for the entire durationInMs they validate
+   * Default Subnet for the entire duration they validate
    * this Subnet.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformaddnondefaultsubnetvalidator)
    */

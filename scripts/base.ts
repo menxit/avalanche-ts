@@ -47,4 +47,4 @@ export class Rpc {
 
 }
 
-export const ASSET_ID_AVAX = "ASSET_ID_AVAX";
+export const ASSET_ID_AVAX = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z";
