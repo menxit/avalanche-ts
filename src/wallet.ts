@@ -5,10 +5,13 @@ import * as helpers from "./helpers"
 
 type KeyGeneratorFunction = (index: number) => Key;
 
-type Net = "avax" | "fuji" | "local"
+type Net = "avax" | "fuji" | "local";
 
 interface Key {
-  privateKey: Buffer;
+  privateKey: {
+    buffer: Buffer,
+    cb58: string,
+  };
   publicKey: Buffer;
   x: string;
   p: string;
@@ -37,7 +40,10 @@ export const keysGenerator = (options: OptionsKeysGenerator) => {
     const { privateKey, publicKey } = hd.derive([path, index].join("/"));
     const address = helpers.getAddressByPublicKey(publicKey);
     return {
-      privateKey: privateKey,
+      privateKey: {
+        buffer: privateKey,
+        cb58: "PrivateKey-" + helpers.cb58Encode(privateKey),
+      },
       publicKey: publicKey,
       x: helpers.formatAddress(net, "X", address),
       p: helpers.formatAddress(net, "P", address),
