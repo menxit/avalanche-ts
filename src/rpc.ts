@@ -8,14 +8,34 @@ const DEFAULT_OPTIONS_RPC = {
   url: "https://api.avax.network"
 };
 
+interface ImportKeyOptions {
+    username?: string;
+    password?: string;
+    privateKey?: string;
+}
+
+interface ImportAVAXOptions {
+    to?: string;
+    sourceChain?: string;
+    username?: string;
+    password?: string;
+}
+
+interface ExportAVAXOptions {
+    to?: string;
+    amount?: number;
+    username?: string;
+    password?: string;
+}
+
 interface AliasOptions {
-    alias: string;
-    endpoint: string;
+    alias?: string;
+    endpoint?: string;
 }
 
 interface AliasChainOptions {
-    chain: string;
-    alias: string;
+    chain?: string;
+    alias?: string;
 }
 
 interface LockProfileOptions {
@@ -31,117 +51,107 @@ interface StopCPUProfilerOptions {
 }
 
 interface NewTokenOptions {
-    password: string;
-    endpoints: string[];
+    password?: string;
+    endpoints?: string[];
 }
 
 interface RevokeTokenOptions {
-    password: string;
-    token: string;
+    password?: string;
+    token?: string;
 }
 
 interface ChangePasswordOptions {
-    oldPassword: string;
-    newPassword: string;
+    oldPassword?: string;
+    newPassword?: string;
 }
 
 interface BuildGenesisOptions {
-    genesisData: IGenesisData;
+    genesisData?: IGenesisData;
 }
 interface IGenesisData {
-    asset1: IAsset1;
-    asset2: IAsset2;
+    asset1?: IAsset1;
+    asset2?: IAsset2;
 }
 interface IAsset1 {
-    name: string;
-    symbol: string;
-    initialState: IInitialState;
+    name?: string;
+    symbol?: string;
+    initialState?: IInitialState;
 }
 interface IInitialState {
     fixedCap?: IFixedCapItem[];
     variableCap?: IVariableCapItem[];
 }
 interface IFixedCapItem {
-    amount: number;
-    address: string;
+    amount?: number;
+    address?: string;
 }
 interface IAsset2 {
-    name: string;
-    symbol: string;
-    initialState: IInitialState;
+    name?: string;
+    symbol?: string;
+    initialState?: IInitialState;
 }
 interface IVariableCapItem {
-    minters: string[];
-    threshold: number;
+    minters?: string[];
+    threshold?: number;
 }
 
 interface CreateAddressOptions {
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
 }
 
 interface CreateFixedCapAssetOptions {
-    name: string;
-    symbol: string;
-    denomination: number;
-    initialHolders: IInitialHoldersItem[];
-    from: string[];
-    changeAddr: string;
-    username: string;
-    password: string;
+    name?: string;
+    symbol?: string;
+    denomination?: number;
+    initialHolders?: IInitialHoldersItem[];
+    from?: string[];
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 interface IInitialHoldersItem {
-    address: string;
-    amount: number;
+    address?: string;
+    amount?: number;
 }
 
 interface CreateNFTAssetOptions {
-    name: string;
-    symbol: string;
-    minterSets: IMinterSetsItem[];
-    from: string[];
-    changeAddr: string;
-    username: string;
-    password: string;
+    name?: string;
+    symbol?: string;
+    minterSets?: IMinterSetsItem[];
+    from?: string[];
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 interface IMinterSetsItem {
-    minters: string[];
-    threshold: number;
+    minters?: string[];
+    threshold?: number;
 }
 
 interface CreateVariableCapAssetOptions {
-    name: string;
-    symbol: string;
-    denomination: number;
-    minterSets: IMinterSetsItem[];
-    from: string[];
-    changeAddr: string;
-    username: string;
-    password: string;
+    name?: string;
+    symbol?: string;
+    denomination?: number;
+    minterSets?: IMinterSetsItem[];
+    from?: string[];
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 interface IMinterSetsItem {
-    minters: string[];
-    threshold: number;
-}
-
-interface ExportAVAXOptions {
-    from: string[];
-    to: string;
-    amount: number;
-    destinationChain: string;
-    changeAddr: string;
-    username: string;
-    password: string;
+    minters?: string[];
+    threshold?: number;
 }
 
 interface ExportKeyOptions {
-    username: string;
-    password: string;
-    address: string;
+    username?: string;
+    password?: string;
+    address?: string;
 }
 
 interface GetAllBalancesOptions {
-    address: string;
+    address?: string;
 }
 
 interface GetAssetDescriptionOptions {
@@ -149,118 +159,105 @@ interface GetAssetDescriptionOptions {
 }
 
 interface GetBalanceOptions {
-    address: string;
+    address?: string;
     assetID?: string;
 }
 
 interface GetTxOptions {
-    txID: string;
+    txID?: string;
 }
 
 interface GetTxStatusOptions {
-    txID: string;
+    txID?: string;
 }
 
 interface GetUTXOsOptions {
-    addresses: string[];
-    limit: number;
-}
-
-interface ImportAVAXOptions {
-    username: string;
-    password: string;
-    sourceChain: string;
-    to: string;
-}
-
-interface ImportKeyOptions {
-    username: string;
-    password: string;
-    privateKey: string;
+    addresses?: string[];
+    limit?: number;
 }
 
 interface IssueTxOptions {
-    tx: string;
+    tx?: string;
 }
 
 interface ListAddressesOptions {
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
 }
 
 interface MintOptions {
-    amount: number;
+    amount?: number;
     assetID?: string;
-    from: string[];
-    to: string;
-    minters: string[];
-    changeAddr: string;
-    username: string;
-    password: string;
+    from?: string[];
+    to?: string;
+    minters?: string[];
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 
 interface MintNFTOptions {
     assetID?: string;
-    payload: string;
-    from: string[];
-    to: string;
-    minters: string[];
-    changeAddr: string;
-    username: string;
-    password: string;
+    payload?: string;
+    from?: string[];
+    to?: string;
+    minters?: string[];
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 
 interface SendOptions {
     assetID?: string;
-    amount: number;
-    from: string[];
-    to: string;
-    changeAddr: string;
-    memo: string;
-    username: string;
-    password: string;
+    amount?: number;
+    from?: string[];
+    to?: string;
+    changeAddr?: string;
+    memo?: string;
+    username?: string;
+    password?: string;
 }
 
 interface SendMultipleOptions {
-    outputs: IOutputsItem[];
-    from: string[];
-    changeAddr: string;
-    memo: string;
-    username: string;
-    password: string;
+    outputs?: IOutputsItem[];
+    from?: string[];
+    changeAddr?: string;
+    memo?: string;
+    username?: string;
+    password?: string;
 }
 interface IOutputsItem {
     assetID?: string;
-    to: string;
-    amount: number;
+    to?: string;
+    amount?: number;
 }
 
 interface SendNFTOptions {
     assetID?: string;
-    from: string[];
-    to: string;
-    groupID: number;
-    changeAddr: string;
-    username: string;
-    password: string;
+    from?: string[];
+    to?: string;
+    groupID?: number;
+    changeAddr?: string;
+    username?: string;
+    password?: string;
 }
 
 type EthCallOptions = any[];
 interface IRootObjectItem {
-    to: string;
-    data: string;
+    to?: string;
+    data?: string;
 }
 
 type EthGetBalanceOptions = string[];
 
 type EthSignTransactionOptions = IRootObjectItem[];
 interface IRootObjectItem {
-    from: string;
-    to: string;
-    gas: string;
-    gasPrice: string;
-    nonce: string;
-    value: string;
+    from?: string;
+    to?: string;
+    gas?: string;
+    gasPrice?: string;
+    nonce?: string;
+    value?: string;
 }
 
 type EthGetTransactionCountOptions = string[];
@@ -284,7 +281,7 @@ type PersonalUnlockAccountOptions = (string | number)[];
 type Web3Sha3Options = string[];
 
 interface GetBlockchainIDOptions {
-    alias: string;
+    alias?: string;
 }
 
 interface GetNetworkIDOptions {
@@ -300,7 +297,7 @@ interface GetNodeVersionOptions {
 }
 
 interface IsBootstrappedOptions {
-    chain: string;
+    chain?: string;
 }
 
 interface GetTxFeeOptions {
@@ -310,93 +307,93 @@ interface PeersOptions {
 }
 
 interface PublishBlockchainOptions {
-    blockchainID: string;
+    blockchainID?: string;
 }
 
 interface UnpublishBlockchainOptions {
-    blockchainID: string;
+    blockchainID?: string;
 }
 
 interface CreateUserOptions {
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
 }
 
 interface DeleteUserOptions {
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
 }
 
 interface ExportUserOptions {
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
 }
 
 interface ImportUserOptions {
-    username: string;
-    password: string;
-    user: string;
+    username?: string;
+    password?: string;
+    user?: string;
 }
 
 interface AddDelegatorOptions {
-    nodeId: string;
-    startTime: number;
-    endTime: number;
-    stakeAmount: number;
-    rewardAddress: string;
-    username: string;
-    password: string;
+    nodeId?: string;
+    startTime?: number;
+    endTime?: number;
+    stakeAmount?: number;
+    rewardAddress?: string;
+    username?: string;
+    password?: string;
 }
 
 interface AddValidatorOptions {
-    nodeID: string;
-    startTime: number;
-    endTime: number;
-    stakeAmount: number;
-    rewardAddress: string;
-    delegationFeeRate: number;
-    username: string;
-    password: string;
+    nodeID?: string;
+    startTime?: number;
+    endTime?: number;
+    stakeAmount?: number;
+    rewardAddress?: string;
+    delegationFeeRate?: number;
+    username?: string;
+    password?: string;
 }
 
 interface AddSubnetValidatorOptions {
-    nodeID: string;
-    subnetID: string;
-    startTime: number;
-    endTime: number;
-    weight: number;
-    username: string;
-    password: string;
+    nodeID?: string;
+    subnetID?: string;
+    startTime?: number;
+    endTime?: number;
+    weight?: number;
+    username?: string;
+    password?: string;
 }
 
 interface CreateBlockchainOptions {
-    vmID: string;
-    SubnetID: string;
-    name: string;
-    genesisData: string;
-    username: string;
-    password: string;
+    vmID?: string;
+    SubnetID?: string;
+    name?: string;
+    genesisData?: string;
+    username?: string;
+    password?: string;
 }
 
 interface CreateSubnetOptions {
-    controlKeys: string[];
-    threshold: number;
-    username: string;
-    password: string;
+    controlKeys?: string[];
+    threshold?: number;
+    username?: string;
+    password?: string;
 }
 
 interface GetBlockchainsOptions {
 }
 
 interface GetBlockchainStatusOptions {
-    blockchainID: string;
+    blockchainID?: string;
 }
 
 interface GetCurrentSupplyOptions {
 }
 
 interface GetCurrentValidatorsOptions {
-    subnetID: string;
+    subnetID?: string;
 }
 
 interface GetHeightOptions {
@@ -406,11 +403,11 @@ interface GetMinStakeOptions {
 }
 
 interface GetStakeOptions {
-    addresses: string[];
+    addresses?: string[];
 }
 
 interface GetPendingValidatorsOptions {
-    subnetID: string;
+    subnetID?: string;
 }
 
 interface GetStakingAssetIDOptions {
@@ -420,15 +417,15 @@ interface GetSubnetsOptions {
 }
 
 interface SampleValidatorsOptions {
-    size: number;
+    size?: number;
 }
 
 interface ValidatedByOptions {
-    blockchainID: string;
+    blockchainID?: string;
 }
 
 interface ValidatesOptions {
-    subnetID: string;
+    subnetID?: string;
 }
 
 
@@ -471,6 +468,42 @@ export class Rpc {
 }
 
 export const ASSET_ID_AVAX = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z";
+
+/**
+ * This API can be used for cchain atomic
+ * swaps
+ */
+export class CChain extends Rpc {
+  
+  /**
+   * Import private key cchain.
+   */
+  importKey(options: ImportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importKey", params: options });
+  }
+  
+
+
+  /**
+   * Import avax from xchain to cchain.
+   */
+  importAVAX(options: ImportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Export avax from cchain to xchain.
+   */
+  exportAVAX(options: ExportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
+  }
+  
+
+}
+
+export const cchain = new CChain();
 
 /**
  * This API can be used for measuring node
@@ -657,20 +690,6 @@ export class AVM extends Rpc {
 
 
   /**
-   * Export AVAX from both the X-Chain to the
-   * P-Chain as well as from the X-Chain to
-   * the C-Chain.After calling this method, you must call
-   * either the P-Chain’s `importAVAX` method or the C-Chain's
-   * `importAVAX` method to complete the transfer.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
-   */
-  exportAVAX(options: ExportAVAXOptions) {
-    return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportAVAX", params: options });
-  }
-  
-
-
-  /**
    * Get the private key that controls a given
    * address.The returned private key can be added to
    * a user with `avm.importKey`.
@@ -742,31 +761,6 @@ export class AVM extends Rpc {
    */
   getUTXOs(options: GetUTXOsOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getUTXOs", params: options });
-  }
-  
-
-
-  /**
-   * Finalize a transfer of AVAX from either the
-   * P-Chain to the X-Chain or the C-Chain to
-   * the X-Chain.Before this method is called, you must
-   * call either the P-Chain’s `exportAVAX` method or the
-   * C-Chain’s `exportAVAX` method to initiate the transfer.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportavax)
-   */
-  importAVAX(options: ImportAVAXOptions) {
-    return this.fetch({ endpoint: "ext/bc/X", method: "avm.importAVAX", params: options });
-  }
-  
-
-
-  /**
-   * Give a user control over an address by
-   * providing the private key that controls the address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
-   */
-  importKey(options: ImportKeyOptions) {
-    return this.fetch({ endpoint: "ext/bc/X", method: "avm.importKey", params: options });
   }
   
 

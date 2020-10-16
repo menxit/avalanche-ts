@@ -76,7 +76,114 @@ function formatComment(str, prefix = " * ") {
 
 const getAvalanchePostmanCollection = async () => {
   const url = "https://raw.githubusercontent.com/cgcardona/avalanche-postman-collection/master/Avalanche.postman_collection.json";
-  return nodeFetch(url).then(res => res.json());
+  let json = await nodeFetch(url).then(res => res.json());
+  json.item = [
+    {
+      "name": "CChain",
+      "item": [
+        {
+            "name": "importKey",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"avax.importKey\",\"params\":{\"username\":\"myUsername\",\"password\":\"myPassword\",\"privateKey\":\"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq\"}}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{http}}://{{host}}:{{port}}/ext/bc/C/avax",
+                "protocol": "{{http}}",
+                "host": [
+                  "{{host}}"
+                ],
+                "port": "{{port}}",
+                "path": [
+                  "ext",
+                  "bc",
+                  "C",
+                  "avax"
+                ]
+              },
+              "description": "Import private key cchain."
+            },
+            "response": []
+        },
+        {
+          "name": "importAVAX",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"avax.importAVAX\",\"params\":{\"to\":\"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398\",\"sourceChain\":\"X\",\"username\":\"myUsername\",\"password\":\"myPassword\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{http}}://{{host}}:{{port}}/ext/bc/C/avax",
+              "protocol": "{{http}}",
+              "host": [
+                "{{host}}"
+              ],
+              "port": "{{port}}",
+              "path": [
+                "ext",
+                "bc",
+                "C",
+                "avax"
+              ]
+            },
+            "description": "Import avax from xchain to cchain."
+          },
+          "response": []
+        },
+        {
+          "name": "exportAVAX",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"avax.exportAVAX\",\"params\":{\"to\":\"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q\",\"amount\":5000000,\"username\":\"myUsername\",\"password\":\"myPassword\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{http}}://{{host}}:{{port}}/ext/bc/C/avax",
+              "protocol": "{{http}}",
+              "host": [
+                "{{host}}"
+              ],
+              "port": "{{port}}",
+              "path": [
+                "ext",
+                "bc",
+                "C",
+                "avax"
+              ]
+            },
+            "description": "Export avax from cchain to xchain."
+          },
+          "response": []
+        },
+      ],
+      "description": "This API can be used for cchain atomic swaps",
+      "protocolProfileBehavior": {}
+    },
+    ...json.item,
+  ]
+  return json;
 }
 
 getAvalanchePostmanCollection().then(postmaneCollection => {
@@ -120,6 +227,7 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
           const typeName = capitalizeFirstLetter(i.name)+"Options"
           parameters = `options: ${typeName}`;
           type = type.replace("IRootObject", typeName);
+          type = type.split(":").join("?:").split("??").join("?")
           prev = addInterfaces(prev, type);
           const types = type.split("}")
           const rootType = types[0];
