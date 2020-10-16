@@ -144,6 +144,16 @@ interface IMinterSetsItem {
     threshold?: number;
 }
 
+interface ExportAVAXOptions {
+    from?: string[];
+    to?: string;
+    amount?: number;
+    destinationChain?: string;
+    changeAddr?: string;
+    username?: string;
+    password?: string;
+}
+
 interface ExportKeyOptions {
     username?: string;
     password?: string;
@@ -174,6 +184,19 @@ interface GetTxStatusOptions {
 interface GetUTXOsOptions {
     addresses?: string[];
     limit?: number;
+}
+
+interface ImportAVAXOptions {
+    username?: string;
+    password?: string;
+    sourceChain?: string;
+    to?: string;
+}
+
+interface ImportKeyOptions {
+    username?: string;
+    password?: string;
+    privateKey?: string;
 }
 
 interface IssueTxOptions {
@@ -272,6 +295,35 @@ type EthGetTransactionByHashOptions = string[];
 
 type EthGetTransactionReceiptOptions = string[];
 
+interface ExportAVAXOptions {
+    from?: string[];
+    to?: string;
+    amount?: number;
+    destinationChain?: string;
+    changeAddr?: string;
+    username?: string;
+    password?: string;
+}
+
+interface ExportKeyOptions {
+    username?: string;
+    password?: string;
+    address?: string;
+}
+
+interface ImportAVAXOptions {
+    username?: string;
+    password?: string;
+    sourceChain?: string;
+    to?: string;
+}
+
+interface ImportKeyOptions {
+    username?: string;
+    password?: string;
+    privateKey?: string;
+}
+
 type PersonalNewAccountOptions = string[];
 
 type PersonalImportRawKeyOptions = string[];
@@ -366,6 +418,11 @@ interface AddSubnetValidatorOptions {
     password?: string;
 }
 
+interface CreateAddressOptions {
+    username?: string;
+    password?: string;
+}
+
 interface CreateBlockchainOptions {
     vmID?: string;
     SubnetID?: string;
@@ -380,6 +437,10 @@ interface CreateSubnetOptions {
     threshold?: number;
     username?: string;
     password?: string;
+}
+
+interface GetBalanceOptions {
+    address?: string;
 }
 
 interface GetBlockchainsOptions {
@@ -406,6 +467,10 @@ interface GetStakeOptions {
     addresses?: string[];
 }
 
+interface GetTxStatusOptions {
+    txID?: string;
+}
+
 interface GetPendingValidatorsOptions {
     subnetID?: string;
 }
@@ -414,6 +479,51 @@ interface GetStakingAssetIDOptions {
 }
 
 interface GetSubnetsOptions {
+}
+
+interface GetTxOptions {
+    txID?: string;
+}
+
+interface GetUTXOsOptions {
+    addresses?: string[];
+    sourceChain?: string;
+    limit?: number;
+}
+
+interface ExportAVAXOptions {
+    to?: string;
+    amount?: number;
+    username?: string;
+    password?: string;
+}
+
+interface ExportKeyOptions {
+    username?: string;
+    password?: string;
+    address?: string;
+}
+
+interface ImportAVAXOptions {
+    username?: string;
+    password?: string;
+    sourceChain?: string;
+    to?: string;
+}
+
+interface ImportKeyOptions {
+    username?: string;
+    password?: string;
+    privateKey?: string;
+}
+
+interface IssueTxOptions {
+    tx?: string;
+}
+
+interface ListAddressesOptions {
+    username?: string;
+    password?: string;
 }
 
 interface SampleValidatorsOptions {
@@ -690,6 +800,20 @@ export class AVM extends Rpc {
 
 
   /**
+   * Export AVAX from both the X-Chain to the
+   * P-Chain as well as from the X-Chain to
+   * the C-Chain.After calling this method, you must call
+   * either the P-Chain’s `importAVAX` method or the C-Chain's
+   * `importAVAX` method to complete the transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   */
+  exportAVAX(options: ExportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportAVAX", params: options });
+  }
+  
+
+
+  /**
    * Get the private key that controls a given
    * address.The returned private key can be added to
    * a user with `avm.importKey`.
@@ -761,6 +885,31 @@ export class AVM extends Rpc {
    */
   getUTXOs(options: GetUTXOsOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getUTXOs", params: options });
+  }
+  
+
+
+  /**
+   * Finalize a transfer of AVAX from either the
+   * P-Chain to the X-Chain or the C-Chain to
+   * the X-Chain.Before this method is called, you must
+   * call either the P-Chain’s `exportAVAX` method or the
+   * C-Chain’s `exportAVAX` method to initiate the transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportavax)
+   */
+  importAVAX(options: ImportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/X", method: "avm.importAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Give a user control over an address by
+   * providing the private key that controls the address.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
+   */
+  importKey(options: ImportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/X", method: "avm.importKey", params: options });
   }
   
 
@@ -971,6 +1120,55 @@ export class EVM extends Rpc {
    */
   eth_getTransactionReceipt(options: EthGetTransactionReceiptOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionReceipt", params: options });
+  }
+  
+
+
+  /**
+   * Send AVAX from the X-Chain to an account
+   * on the P-Chain.After calling this method, you must
+   * call the P-Chain’s `importAVAX` method to complete the
+   * transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   */
+  exportAVAX(options: ExportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Get the private key that controls a given
+   * address.The returned private key can be added to
+   * a user with `avm.importKey`.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportkey)
+   */
+  exportKey(options: ExportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportKey", params: options });
+  }
+  
+
+
+  /**
+   * Send AVAX from the X-Chain to an account
+   * on the P-Chain.After calling this method, you must
+   * call the P-Chain’s `importAVAX` method to complete the
+   * transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   */
+  importAVAX(options: ImportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Give a user control over an address by
+   * providing the private key that controls the address.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
+   */
+  importKey(options: ImportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importKey", params: options });
   }
   
 
@@ -1372,6 +1570,25 @@ export class PlatformVM extends Rpc {
 
 
   /**
+   * Add a delegator to the Default Subnet.A delegator
+   * stakes AVAX and specifies a validator (the delegatee)
+   * to validate on their behalf. The delegatee has
+   * an increased probability of being sampled by other
+   * validators (weight) in proportion to the stake delegated
+   * to them.The delegatee charges a fee to the
+   * delegator; the former receives a percentage of the
+   * delegator’s validation reward (if any.)The delegation period must
+   * be a subset of the perdiod that the
+   * delegatee validates the Default Subnet.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformadddefaultsubnetdelegator)
+   */
+  createAddress(options: CreateAddressOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.createAddress", params: options });
+  }
+  
+
+
+  /**
    * Create a new blockchain. Currently only supports creation
    * of new instances of the AVM and the
    * Timestamp VM.
@@ -1394,6 +1611,17 @@ export class PlatformVM extends Rpc {
    */
   createSubnet(options: CreateSubnetOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.createSubnet", params: options });
+  }
+  
+
+
+  /**
+   * Get the balance of an asset controlled by
+   * a given address.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetbalance)
+   */
+  getBalance(options: GetBalanceOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBalance", params: options });
   }
   
 
@@ -1472,6 +1700,15 @@ export class PlatformVM extends Rpc {
 
 
   /**
+   * Returns the status of a platform chain transaction.
+   */
+  getTxStatus(options: GetTxStatusOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getTxStatus", params: options });
+  }
+  
+
+
+  /**
    * List the validators in the pending validator set
    * of the specified Subnet. Each validator is not
    * currently validating the Subnet but will in the
@@ -1502,6 +1739,96 @@ export class PlatformVM extends Rpc {
    */
   getSubnets(options: GetSubnetsOptions) {
     return this.fetch({ endpoint: "ext/bc/P", method: "platform.getSubnets", params: options });
+  }
+  
+
+
+  /**
+   * Returns the specified transaction @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
+   */
+  getTx(options: GetTxOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getTx", params: options });
+  }
+  
+
+
+  /**
+   * Get the UTXOs that reference a given address.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetutxos)
+   */
+  getUTXOs(options: GetUTXOsOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getUTXOs", params: options });
+  }
+  
+
+
+  /**
+   * Send AVAX from an account on the C-Chain
+   * to an address on the X-Chain.This transaction must
+   * be signed with the key of the account
+   * that the AVAX is sent from and which
+   * pays the transaction fee.After issuing this transaction, you
+   * must call the X-Chain’s `importAVA` method to complete
+   * the transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformexportavax)
+   */
+  exportAVAX(options: ExportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.exportAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Get the private key that controls a given
+   * address.The returned private key can be added to
+   * a user with `platform.importKey`.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformexportkey)
+   */
+  exportKey(options: ExportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.exportKey", params: options });
+  }
+  
+
+
+  /**
+   * Complete a transfer of AVAX from the X-Chain
+   * to the C-Chain.Before this method is called, you
+   * must call the X-Chain’s `exportAVAX` method to initiate
+   * the transfer. [More Info](https://docs.avax.network/v1.0/en/api/platform/#avmimportava)
+   */
+  importAVAX(options: ImportAVAXOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.importAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Give a user control over an address by
+   * providing the private key that controls the address.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformimportkey)
+   */
+  importKey(options: ImportKeyOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.importKey", params: options });
+  }
+  
+
+
+  /**
+   * Issue a transaction to the Platform Chain.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformissuetx)
+   */
+  issueTx(options: IssueTxOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.issueTx", params: options });
+  }
+  
+
+
+  /**
+   * List the addresses controlled by the given user.
+   * @url(https://docs.avax.network/v1.0/en/api/platform/#platformlistaddresses)
+   */
+  listAddresses(options: ListAddressesOptions) {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.listAddresses", params: options });
   }
   
 

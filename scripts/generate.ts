@@ -213,7 +213,7 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
   // 3. Populate class with methods
   let used = {};
   result = postmaneCollection.item.reduce((prev, curr) => {
-
+    used = {};
     const requestes = curr.item
       .map(i => {
         if (used[i.name]) return undefined;
