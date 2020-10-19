@@ -560,7 +560,7 @@ export class Rpc {
         jsonrpc: "2.0",
         id: 1,
         method: options.method,
-        params: { ...options.params },
+        params: options.params,
       }),
     }).then(res => {
       return res.json();

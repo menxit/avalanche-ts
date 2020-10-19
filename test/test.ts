@@ -19,4 +19,10 @@ import { rpc, wallet, stats } from '../src'
   });
   console.log({ rewards });
 
+  const ethBlock = await rpc.evm.eth_getBlockByHash([
+    "0x15861adf05446c1f714aeb5cc4d6510990270b5715246bbc62352cb461d2a726",
+    true
+  ]);
+  console.log({ ethBlock });
+
 })();

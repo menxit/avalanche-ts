@@ -1,6 +1,6 @@
 {
   "name": "avalanche-ts",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "avalanche typescript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
