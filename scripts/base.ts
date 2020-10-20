@@ -18,7 +18,11 @@ export class Rpc {
     this.url = options.url;
   }
 
-  protected async fetch(options: { endpoint: string, method: string, params?: any }) {
+  setProvider(provider: string) {
+    this.url = provider;
+  }
+
+  public async fetch(options: { endpoint: string, method: string, params?: any }) {
     const url = new URL(this.url);
     url.pathname = options.endpoint;
     return fetch(url.toString(), {

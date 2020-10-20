@@ -28,6 +28,10 @@ interface CChainExportAVAXOptions {
     password?: string;
 }
 
+interface CChainGetAtomicTxByBlockHeightOptions {
+    height?: string;
+}
+
 interface AdminAliasOptions {
     alias?: string;
     endpoint?: string;
@@ -548,7 +552,11 @@ export class Rpc {
     this.url = options.url;
   }
 
-  protected async fetch(options: { endpoint: string, method: string, params?: any }) {
+  setProvider(provider: string) {
+    this.url = provider;
+  }
+
+  public async fetch(options: { endpoint: string, method: string, params?: any }) {
     const url = new URL(this.url);
     url.pathname = options.endpoint;
     return fetch(url.toString(), {
@@ -608,6 +616,15 @@ export class CChain extends Rpc {
    */
   exportAVAX(options: CChainExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
+  }
+  
+
+
+  /**
+   * Retrieve atomic trasanction by block height (hex format)
+   */
+  getAtomicTxByBlockHeight(options: CChainGetAtomicTxByBlockHeightOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.getAtomicTxByBlockHeight", params: options });
   }
   
 

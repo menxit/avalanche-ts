@@ -177,6 +177,38 @@ const getAvalanchePostmanCollection = async () => {
           },
           "response": []
         },
+        {
+          "name": "getAtomicTxByBlockHeight",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"avax.getAtomicTxByBlockHeight\",\"params\":{\"height\":\"00ff00\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{http}}://{{host}}:{{port}}/ext/bc/C/avax",
+              "protocol": "{{http}}",
+              "host": [
+                "{{host}}"
+              ],
+              "port": "{{port}}",
+              "path": [
+                "ext",
+                "bc",
+                "C",
+                "avax"
+              ]
+            },
+            "description": "Retrieve atomic trasanction by block height (hex format)"
+          },
+          "response": []
+        },
       ],
       "description": "This API can be used for cchain atomic swaps",
       "protocolProfileBehavior": {}
