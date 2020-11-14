@@ -12,7 +12,7 @@ export async function calculateReward(options: OptionsCalculateReward) {
   let existingSupply = options.existingSupply || 0;
   if (!existingSupply) {
     try {
-      existingSupply = await rpc.platformvm.getCurrentSupply({}).then(result => parseInt(result.supply));
+      existingSupply = await rpc.platformvm.getCurrentSupply().then(result => parseInt(result.supply));
     } catch (e) {
       console.error(e);
       existingSupply = 0;

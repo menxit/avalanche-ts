@@ -42,18 +42,6 @@ interface AdminAliasChainOptions {
     alias?: string;
 }
 
-interface AdminLockProfileOptions {
-}
-
-interface AdminMemoryProfileOptions {
-}
-
-interface AdminStartCPUProfilerOptions {
-}
-
-interface AdminStopCPUProfilerOptions {
-}
-
 interface AuthNewTokenOptions {
     password?: string;
     endpoints?: string[];
@@ -292,10 +280,6 @@ interface IRootObjectItem {
     data?: string;
 }
 
-type EVMEthGetAssetBalanceOptions = string[];
-
-type EVMEthGetBalanceOptions = string[];
-
 type EVMEthSignTransactionOptions = IRootObjectItem[];
 interface IRootObjectItem {
     from?: string;
@@ -305,18 +289,6 @@ interface IRootObjectItem {
     nonce?: string;
     value?: string;
 }
-
-type EVMEthGetTransactionCountOptions = string[];
-
-type EVMEthSendRawTransactionOptions = string[];
-
-type EVMEthGetBlockByHashOptions = (string | boolean)[];
-
-type EVMEthGetBlockByNumberOptions = (string | boolean)[];
-
-type EVMEthGetTransactionByHashOptions = string[];
-
-type EVMEthGetTransactionReceiptOptions = string[];
 
 interface EVMExportOptions {
     from?: string[];
@@ -383,41 +355,12 @@ interface EVMIssueTxOptions {
     tx?: string;
 }
 
-type EVMPersonalNewAccountOptions = string[];
-
-type EVMPersonalImportRawKeyOptions = string[];
-
-type EVMPersonalUnlockAccountOptions = (string | number)[];
-
-type EVMWeb3Sha3Options = string[];
-
 interface InfoGetBlockchainIDOptions {
     alias?: string;
 }
 
-interface InfoGetNetworkIDOptions {
-}
-
-interface InfoGetNetworkNameOptions {
-}
-
-interface InfoGetNodeIDOptions {
-}
-
-interface InfoGetNodeIPOptions {
-}
-
-interface InfoGetNodeVersionOptions {
-}
-
 interface InfoIsBootstrappedOptions {
     chain?: string;
-}
-
-interface InfoGetTxFeeOptions {
-}
-
-interface InfoPeersOptions {
 }
 
 interface IPCPublishBlockchainOptions {
@@ -505,24 +448,12 @@ interface PlatformVMGetBalanceOptions {
     address?: string;
 }
 
-interface PlatformVMGetBlockchainsOptions {
-}
-
 interface PlatformVMGetBlockchainStatusOptions {
     blockchainID?: string;
 }
 
-interface PlatformVMGetCurrentSupplyOptions {
-}
-
 interface PlatformVMGetCurrentValidatorsOptions {
     subnetID?: string;
-}
-
-interface PlatformVMGetHeightOptions {
-}
-
-interface PlatformVMGetMinStakeOptions {
 }
 
 interface PlatformVMGetStakeOptions {
@@ -536,12 +467,6 @@ interface PlatformVMGetTxStatusOptions {
 
 interface PlatformVMGetPendingValidatorsOptions {
     subnetID?: string;
-}
-
-interface PlatformVMGetStakingAssetIDOptions {
-}
-
-interface PlatformVMGetSubnetsOptions {
 }
 
 interface PlatformVMGetTxOptions {
@@ -728,8 +653,8 @@ export class Admin extends Rpc {
    * the specified file.
    * @url(https://docs.avax.network/build/apis/admin-api#admin-lockprofile)
    */
-  lockProfile(options: AdminLockProfileOptions) {
-    return this.fetch({ endpoint: "ext/admin", method: "admin.lockProfile", params: options });
+  lockProfile() {
+    return this.fetch({ endpoint: "ext/admin", method: "admin.lockProfile" });
   }
   
 
@@ -739,8 +664,8 @@ export class Admin extends Rpc {
    * the specified file.
    * @url(https://docs.avax.network/build/apis/admin-api#admin-memoryprofile)
    */
-  memoryProfile(options: AdminMemoryProfileOptions) {
-    return this.fetch({ endpoint: "ext/admin", method: "admin.memoryProfile", params: options });
+  memoryProfile() {
+    return this.fetch({ endpoint: "ext/admin", method: "admin.memoryProfile" });
   }
   
 
@@ -751,8 +676,8 @@ export class Admin extends Rpc {
    * on stop.
    * @url(https://docs.avax.network/build/apis/admin-api#admin-startcpuprofiler)
    */
-  startCPUProfiler(options: AdminStartCPUProfilerOptions) {
-    return this.fetch({ endpoint: "ext/admin", method: "admin.startCPUProfiler", params: options });
+  startCPUProfiler() {
+    return this.fetch({ endpoint: "ext/admin", method: "admin.startCPUProfiler" });
   }
   
 
@@ -761,8 +686,8 @@ export class Admin extends Rpc {
    * Stop the CPU profile that was previously started.
    * @url(https://docs.avax.network/build/apis/admin-api#admin-stopcpuprofiler)
    */
-  stopCPUProfiler(options: AdminStopCPUProfilerOptions) {
-    return this.fetch({ endpoint: "ext/admin", method: "admin.stopCPUProfiler", params: options });
+  stopCPUProfiler() {
+    return this.fetch({ endpoint: "ext/admin", method: "admin.stopCPUProfiler" });
   }
   
 
@@ -1117,8 +1042,8 @@ export class EVM extends Rpc {
    * Getting the most recent block number.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-the-most-recent-block-number)
    */
-  eth_blockNumber() {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_blockNumber" });
+  eth_blockNumber(options: any) {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_blockNumber", params: options });
   }
   
 
@@ -1127,7 +1052,7 @@ export class EVM extends Rpc {
    * Call a contract.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#call-a-contract)
    */
-  eth_call(options: EVMEthCallOptions) {
+  eth_call(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_call", params: options });
   }
   
@@ -1138,8 +1063,8 @@ export class EVM extends Rpc {
    * EIP694.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-the-chain-id)
    */
-  eth_chainId() {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_chainId" });
+  eth_chainId(options: any) {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_chainId", params: options });
   }
   
 
@@ -1148,7 +1073,7 @@ export class EVM extends Rpc {
    * Getting an account’s non-AVAX balance.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-non-avax-balance)
    */
-  eth_getAssetBalance(options: EVMEthGetAssetBalanceOptions) {
+  eth_getAssetBalance(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getAssetBalance", params: options });
   }
   
@@ -1158,7 +1083,7 @@ export class EVM extends Rpc {
    * Getting an account’s balance.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-an-accounts-balance)
    */
-  eth_getBalance(options: EVMEthGetBalanceOptions) {
+  eth_getBalance(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBalance", params: options });
   }
   
@@ -1171,7 +1096,7 @@ export class EVM extends Rpc {
    * be used with `eth_sendRawTransaction` to execute the transaction.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#signing-a-transaction)
    */
-  eth_signTransaction(options: EVMEthSignTransactionOptions) {
+  eth_signTransaction(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_signTransaction", params: options });
   }
   
@@ -1181,7 +1106,7 @@ export class EVM extends Rpc {
    * Getting an account’s nonce.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-an-accounts-nonce)
    */
-  eth_getTransactionCount(options: EVMEthGetTransactionCountOptions) {
+  eth_getTransactionCount(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionCount", params: options });
   }
   
@@ -1193,7 +1118,7 @@ export class EVM extends Rpc {
    * transaction hash.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#send-a-raw-transaction)
    */
-  eth_sendRawTransaction(options: EVMEthSendRawTransactionOptions) {
+  eth_sendRawTransaction(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_sendRawTransaction", params: options });
   }
   
@@ -1203,7 +1128,7 @@ export class EVM extends Rpc {
    * Getting a block by hash.
    * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-a-block-by-hash)
    */
-  eth_getBlockByHash(options: EVMEthGetBlockByHashOptions) {
+  eth_getBlockByHash(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBlockByHash", params: options });
   }
   
@@ -1213,7 +1138,7 @@ export class EVM extends Rpc {
    * Getting a block by number.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-block-by-number)
    */
-  eth_getBlockByNumber(options: EVMEthGetBlockByNumberOptions) {
+  eth_getBlockByNumber(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBlockByNumber", params: options });
   }
   
@@ -1223,7 +1148,7 @@ export class EVM extends Rpc {
    * Getting a transaction by hash.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-transaction-by-hash)
    */
-  eth_getTransactionByHash(options: EVMEthGetTransactionByHashOptions) {
+  eth_getTransactionByHash(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionByHash", params: options });
   }
   
@@ -1233,7 +1158,7 @@ export class EVM extends Rpc {
    * Getting a transaction receipt.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-transaction-receipt)
    */
-  eth_getTransactionReceipt(options: EVMEthGetTransactionReceiptOptions) {
+  eth_getTransactionReceipt(options: any) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionReceipt", params: options });
   }
   
@@ -1380,8 +1305,8 @@ export class EVM extends Rpc {
    * is more suitable for quick account creation for
    * a testnet.
    */
-  personal_newAccount(options: EVMPersonalNewAccountOptions) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_newAccount", params: options });
+  personal_newAccount() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_newAccount" });
   }
   
 
@@ -1398,8 +1323,8 @@ export class EVM extends Rpc {
    * otherwise the EVM will throw an error. The
    * example response returns the associated public key.
    */
-  personal_importRawKey(options: EVMPersonalImportRawKeyOptions) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_importRawKey", params: options });
+  personal_importRawKey() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_importRawKey" });
   }
   
 
@@ -1422,8 +1347,8 @@ export class EVM extends Rpc {
    * passphrase `cheese` must be provided for authorization.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#unlocking-an-account)
    */
-  personal_unlockAccount(options: EVMPersonalUnlockAccountOptions) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_unlockAccount", params: options });
+  personal_unlockAccount() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "personal_unlockAccount" });
   }
   
 
@@ -1461,8 +1386,8 @@ export class EVM extends Rpc {
    * bytes.
    * @url(https://docs.avax.network/v1.0/en/api/evm/#calculate-a-cryptographic-hash)
    */
-  web3_sha3(options: EVMWeb3Sha3Options) {
-    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "web3_sha3", params: options });
+  web3_sha3() {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "web3_sha3" });
   }
   
 
@@ -1511,8 +1436,8 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/build/apis/info-api#info-getnetworkid)
    */
-  getNetworkID(options: InfoGetNetworkIDOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getNetworkID", params: options });
+  getNetworkID() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNetworkID" });
   }
   
 
@@ -1522,8 +1447,8 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/build/apis/info-api#info-getnetworkname)
    */
-  getNetworkName(options: InfoGetNetworkNameOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getNetworkName", params: options });
+  getNetworkName() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNetworkName" });
   }
   
 
@@ -1533,8 +1458,8 @@ export class Info extends Rpc {
    * is participating in.
    * @url(https://docs.avax.network/build/apis/info-api#info-getnodeid)
    */
-  getNodeID(options: InfoGetNodeIDOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getNodeID", params: options });
+  getNodeID() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNodeID" });
   }
   
 
@@ -1543,8 +1468,8 @@ export class Info extends Rpc {
    * Get the IP of this node.
    * @url(https://docs.avax.network/build/apis/info-api#info-getnodeip)
    */
-  getNodeIP(options: InfoGetNodeIPOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getNodeIP", params: options });
+  getNodeIP() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNodeIP" });
   }
   
 
@@ -1553,8 +1478,8 @@ export class Info extends Rpc {
    * Get the version of this node.
    * @url(https://docs.avax.network/build/apis/info-api#info-getnodeversion)
    */
-  getNodeVersion(options: InfoGetNodeVersionOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getNodeVersion", params: options });
+  getNodeVersion() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNodeVersion" });
   }
   
 
@@ -1573,8 +1498,8 @@ export class Info extends Rpc {
    * Get the transaction fee of the network.
    * @url(https://docs.avax.network/v1.0/en/api/info/#infogettxfee)
    */
-  getTxFee(options: InfoGetTxFeeOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.getTxFee", params: options });
+  getTxFee() {
+    return this.fetch({ endpoint: "ext/info", method: "info.getTxFee" });
   }
   
 
@@ -1583,8 +1508,8 @@ export class Info extends Rpc {
    * Get description of peer connections.
    * @url(https://docs.avax.network/build/apis/info-api#info-peers)
    */
-  peers(options: InfoPeersOptions) {
-    return this.fetch({ endpoint: "ext/info", method: "info.peers", params: options });
+  peers() {
+    return this.fetch({ endpoint: "ext/info", method: "info.peers" });
   }
   
 
@@ -1823,8 +1748,8 @@ export class PlatformVM extends Rpc {
    * P-Chain).
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetblockchains)
    */
-  getBlockchains(options: PlatformVMGetBlockchainsOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBlockchains", params: options });
+  getBlockchains() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getBlockchains" });
   }
   
 
@@ -1846,8 +1771,8 @@ export class PlatformVM extends Rpc {
    * including transaction fees.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetcurrentsupply)
    */
-  getCurrentSupply(options: PlatformVMGetCurrentSupplyOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getCurrentSupply", params: options });
+  getCurrentSupply() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getCurrentSupply" });
   }
   
 
@@ -1866,8 +1791,8 @@ export class PlatformVM extends Rpc {
    * Returns the height of the last accepted block
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetheight)
    */
-  getHeight(options: PlatformVMGetHeightOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getHeight", params: options });
+  getHeight() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getHeight" });
   }
   
 
@@ -1875,8 +1800,8 @@ export class PlatformVM extends Rpc {
   /**
    * Returns the minimum stake amount @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetminstake)
    */
-  getMinStake(options: PlatformVMGetMinStakeOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getMinStake", params: options });
+  getMinStake() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getMinStake" });
   }
   
 
@@ -1919,8 +1844,8 @@ export class PlatformVM extends Rpc {
    * assetID.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetstakingassetid)
    */
-  getStakingAssetID(options: PlatformVMGetStakingAssetIDOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStakingAssetID", params: options });
+  getStakingAssetID() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStakingAssetID" });
   }
   
 
@@ -1929,8 +1854,8 @@ export class PlatformVM extends Rpc {
    * Get all the Subnets that exist.
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetsubnets)
    */
-  getSubnets(options: PlatformVMGetSubnetsOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getSubnets", params: options });
+  getSubnets() {
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getSubnets" });
   }
   
 

@@ -254,14 +254,21 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
 
         let parameters: any = "";
         let containsAssetID = false;
+        let noType = false;
         if (res.params !== null) {
           let type = json2ts(JSON.stringify(res.params));
           const typeName = curr.name+capitalizeFirstLetter(i.name)+"Options"
+          const types = type.split("}")
+          noType = types[0].split("\n").length === 2;
           parameters = `options: ${typeName}`;
           type = type.replace("IRootObject", typeName);
           type = type.split(":").join("?:").split("??").join("?")
-          prev = addInterfaces(prev, type);
-          const types = type.split("}")
+          if (!noType) {
+            prev = addInterfaces(prev, type);
+          }
+          else {
+            parameters = "";
+          }
           const rootType = types[0];
           containsAssetID = /.*assetID.*/.test(rootType);
         }
@@ -277,8 +284,8 @@ export const ${curr.name.toLowerCase()} = new ${curr.name}();
   /**
    * ${formatComment(i.request.description, "   * ")}
    */
-  ${i.name}(${parameters}) {${containsAssetID ? `\n\t\toptions.assetID = options.assetID || ASSET_ID_AVAX;` : ''}
-    return this.fetch({ endpoint: "${endpoint}", method: "${method}"${parameters === '' ? ' ' : ', params: options ' }});
+  ${i.name}(${/eth_/.test(i.name) ? "options: any" : parameters}) {${containsAssetID ? `\n\t\toptions.assetID = options.assetID || ASSET_ID_AVAX;` : ''}
+    return this.fetch({ endpoint: "${endpoint}", method: "${method}"${parameters === '' && !/eth_/.test(i.name) ? ' ' : ', params: options ' }});
   }
   
 `
