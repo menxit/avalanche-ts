@@ -25,10 +25,4 @@ import { rpc, wallet, stats } from '../src'
   ]);
   console.log({ ethBlock });
 
-  rpc.cchain.setProvider("http://avalanchego.api.avascan.info");
-  const atomicTransaction = await rpc.cchain.getAtomicTxByBlockHeight({
-    height: "0172"
-  });
-  console.log({ atomicTransaction });
-
 })();

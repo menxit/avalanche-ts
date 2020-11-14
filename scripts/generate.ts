@@ -75,7 +75,7 @@ function formatComment(str, prefix = " * ") {
 }
 
 const getAvalanchePostmanCollection = async () => {
-  const url = "https://raw.githubusercontent.com/cgcardona/avalanche-postman-collection/master/Avalanche.postman_collection.json";
+  const url = "https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Avalanche.postman_collection.json";
   let json = await nodeFetch(url).then(res => res.json());
   json.item = [
     {

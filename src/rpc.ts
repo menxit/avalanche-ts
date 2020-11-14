@@ -148,6 +148,16 @@ interface IMinterSetsItem {
     threshold?: number;
 }
 
+interface AVMExportOptions {
+    from?: string[];
+    to?: string;
+    amount?: number;
+    assetID?: string;
+    changeAddr?: string;
+    username?: string;
+    password?: string;
+}
+
 interface AVMExportAVAXOptions {
     from?: string[];
     to?: string;
@@ -188,6 +198,13 @@ interface AVMGetTxStatusOptions {
 interface AVMGetUTXOsOptions {
     addresses?: string[];
     limit?: number;
+}
+
+interface AVMImportOptions {
+    username?: string;
+    password?: string;
+    sourceChain?: string;
+    to?: string;
 }
 
 interface AVMImportAVAXOptions {
@@ -275,6 +292,8 @@ interface IRootObjectItem {
     data?: string;
 }
 
+type EVMEthGetAssetBalanceOptions = string[];
+
 type EVMEthGetBalanceOptions = string[];
 
 type EVMEthSignTransactionOptions = IRootObjectItem[];
@@ -299,6 +318,17 @@ type EVMEthGetTransactionByHashOptions = string[];
 
 type EVMEthGetTransactionReceiptOptions = string[];
 
+interface EVMExportOptions {
+    from?: string[];
+    to?: string;
+    amount?: number;
+    destinationChain?: string;
+    changeAddr?: string;
+    assetID?: string;
+    username?: string;
+    password?: string;
+}
+
 interface EVMExportAVAXOptions {
     from?: string[];
     to?: string;
@@ -315,6 +345,27 @@ interface EVMExportKeyOptions {
     address?: string;
 }
 
+interface EVMGetTxOptions {
+    txID?: string;
+}
+
+interface EVMGetTxStatusOptions {
+    txID?: string;
+}
+
+interface EVMGetUTXOsOptions {
+    addresses?: string[];
+    sourceChain?: string;
+    limit?: number;
+}
+
+interface EVMImportOptions {
+    username?: string;
+    password?: string;
+    sourceChain?: string;
+    to?: string;
+}
+
 interface EVMImportAVAXOptions {
     username?: string;
     password?: string;
@@ -326,6 +377,10 @@ interface EVMImportKeyOptions {
     username?: string;
     password?: string;
     privateKey?: string;
+}
+
+interface EVMIssueTxOptions {
+    tx?: string;
 }
 
 type EVMPersonalNewAccountOptions = string[];
@@ -347,6 +402,9 @@ interface InfoGetNetworkNameOptions {
 }
 
 interface InfoGetNodeIDOptions {
+}
+
+interface InfoGetNodeIPOptions {
 }
 
 interface InfoGetNodeVersionOptions {
@@ -473,6 +531,7 @@ interface PlatformVMGetStakeOptions {
 
 interface PlatformVMGetTxStatusOptions {
     txID?: string;
+    includeReason?: boolean;
 }
 
 interface PlatformVMGetPendingValidatorsOptions {
@@ -644,7 +703,7 @@ export class Admin extends Rpc {
    * for the API. The original endpoint will still
    * work. This change only affects this node; other
    * nodes will not know about this alias.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminalias)
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-alias)
    */
   alias(options: AdminAliasOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.alias", params: options });
@@ -656,7 +715,7 @@ export class Admin extends Rpc {
    * Give a blockchain an alias, a different name
    * that can be used any place the blockchain’s
    * ID is used.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminaliaschain)
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-aliaschain)
    */
   aliasChain(options: AdminAliasChainOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.aliasChain", params: options });
@@ -667,7 +726,7 @@ export class Admin extends Rpc {
   /**
    * Dump the mutex statistics of the node to
    * the specified file.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminlockprofile)
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-lockprofile)
    */
   lockProfile(options: AdminLockProfileOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.lockProfile", params: options });
@@ -676,9 +735,9 @@ export class Admin extends Rpc {
 
 
   /**
-   * Runs a memory profile writing to the specified
-   * file.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminmemoryprofile)
+   * Dump the mutex statistics of the node to
+   * the specified file.
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-memoryprofile)
    */
   memoryProfile(options: AdminMemoryProfileOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.memoryProfile", params: options });
@@ -690,7 +749,7 @@ export class Admin extends Rpc {
    * Start profiling the CPU utilization of the node.
    * Will write the profile to the specified file
    * on stop.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminstartcpuprofiler)
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-startcpuprofiler)
    */
   startCPUProfiler(options: AdminStartCPUProfilerOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.startCPUProfiler", params: options });
@@ -700,7 +759,7 @@ export class Admin extends Rpc {
 
   /**
    * Stop the CPU profile that was previously started.
-   * @url(https://docs.avax.network/v1.0/en/api/admin/#adminstopcpuprofiler)
+   * @url(https://docs.avax.network/build/apis/admin-api#admin-stopcpuprofiler)
    */
   stopCPUProfiler(options: AdminStopCPUProfilerOptions) {
     return this.fetch({ endpoint: "ext/admin", method: "admin.stopCPUProfiler", params: options });
@@ -720,7 +779,8 @@ export class Auth extends Rpc {
   
   /**
    * Creates a new authorization token that grants access
-   * to one or more API endpoints. (https://docs.avax.network/v1.0/en/api/auth/#authnewtoken)
+   * to one or more API endpoints.
+   * @url(https://docs.avax.network/build/apis/auth-api#auth-newtoken)
    */
   newToken(options: AuthNewTokenOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.newToken", params: options });
@@ -732,7 +792,7 @@ export class Auth extends Rpc {
    * Revoke a previously generated token. The given token
    * will no longer grant access to any endpoint.If
    * the token is invalid, does nothing.
-   * @url(https://docs.avax.network/v1.0/en/api/auth/#authrevoketoken)
+   * @url(https://docs.avax.network/build/apis/auth-api#auth-revoketoken)
    */
   revokeToken(options: AuthRevokeTokenOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.revokeToken", params: options });
@@ -744,7 +804,7 @@ export class Auth extends Rpc {
    * Change this node's authorization token password. Any authorization
    * tokens created under an old password will become
    * invalid.
-   * @url(https://docs.avax.network/v1.0/en/api/auth/#authchangepassword)
+   * @url(https://docs.avax.network/build/apis/auth-api#auth-changepassword)
    */
   changePassword(options: AuthChangePasswordOptions) {
     return this.fetch({ endpoint: "ext/auth", method: "auth.changePassword", params: options });
@@ -768,7 +828,7 @@ export class AVM extends Rpc {
   /**
    * Create a new address controlled by the given
    * user.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreateaddress)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-createaddress)
    */
   createAddress(options: AVMCreateAddressOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createAddress", params: options });
@@ -781,7 +841,7 @@ export class AVM extends Rpc {
    * of it is created at initialization and then
    * no more is ever created. The asset can
    * be sent with `avm.send`.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatefixedcapasset)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-createfixedcapasset)
    */
   createFixedCapAsset(options: AVMCreateFixedCapAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createFixedCapAsset", params: options });
@@ -794,7 +854,7 @@ export class AVM extends Rpc {
    * the asset exist at initialization. Minters can mint
    * units of this asset using `mintTx` and `signMintTx`.
    * The asset can be sent with `avm.sendNFT`.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatenftasset)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-createnftasset)
    */
   createNFTAsset(options: AVMCreateNFTAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createNFTAsset", params: options });
@@ -808,7 +868,7 @@ export class AVM extends Rpc {
    * mint units of this asset using `createMintTx`, `signMintTx`
    * and `issueTx`. The asset can be sent with
    * `avm.send`.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreatevariablecapasset)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-createvariablecapasset)
    */
   createVariableCapAsset(options: AVMCreateVariableCapAssetOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.createVariableCapAsset", params: options });
@@ -817,12 +877,26 @@ export class AVM extends Rpc {
 
 
   /**
-   * Export AVAX from both the X-Chain to the
-   * P-Chain as well as from the X-Chain to
-   * the C-Chain.After calling this method, you must call
-   * either the P-Chain’s `importAVAX` method or the C-Chain's
-   * `importAVAX` method to complete the transfer.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   * Export a non-AVAX asset from the X-Chain to
+   * the C-Chain. After calling this method, you must
+   * call the C-Chain’s `import` method to complete the
+   * transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexport)
+   */
+  export(options: AVMExportOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
+    return this.fetch({ endpoint: "ext/bc/X", method: "avm.export", params: options });
+  }
+  
+
+
+  /**
+   * Export AVAX from the X-Chain to both the
+   * P-Chain as well as the C-Chain. After calling
+   * this method, you must call either the P-Chain’s
+   * `importAVAX` method or the C-Chain's `importAVAX` method to
+   * complete the transfer.
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-exportavax)
    */
   exportAVAX(options: AVMExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportAVAX", params: options });
@@ -834,7 +908,7 @@ export class AVM extends Rpc {
    * Get the private key that controls a given
    * address.The returned private key can be added to
    * a user with `avm.importKey`.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportkey)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-exportkey)
    */
   exportKey(options: AVMExportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.exportKey", params: options });
@@ -845,7 +919,7 @@ export class AVM extends Rpc {
   /**
    * Get the balances of all assets controlled by
    * a given address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetallbalances)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-getallbalances)
    */
   getAllBalances(options: AVMGetAllBalancesOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getAllBalances", params: options });
@@ -855,7 +929,7 @@ export class AVM extends Rpc {
 
   /**
    * Get information about an asset.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetassetdescription)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-getassetdescription)
    */
   getAssetDescription(options: AVMGetAssetDescriptionOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -867,7 +941,7 @@ export class AVM extends Rpc {
   /**
    * Get the balance of an asset controlled by
    * a given address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-getbalance)
    */
   getBalance(options: AVMGetBalanceOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -877,7 +951,7 @@ export class AVM extends Rpc {
 
 
   /**
-   * Returns the specified transaction @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
+   * Returns the specified transaction @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-gettx)
    */
   getTx(options: AVMGetTxOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getTx", params: options });
@@ -888,7 +962,7 @@ export class AVM extends Rpc {
   /**
    * Get the status of a transaction sent to
    * the network.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgettxstatus)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-gettxstatus)
    */
   getTxStatus(options: AVMGetTxStatusOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getTxStatus", params: options });
@@ -898,7 +972,7 @@ export class AVM extends Rpc {
 
   /**
    * Get the UTXOs that reference a given address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetutxos)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-getutxos)
    */
   getUTXOs(options: AVMGetUTXOsOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.getUTXOs", params: options });
@@ -914,6 +988,20 @@ export class AVM extends Rpc {
    * C-Chain’s `exportAVAX` method to initiate the transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportavax)
    */
+  import(options: AVMImportOptions) {
+    return this.fetch({ endpoint: "ext/bc/X", method: "avm.import", params: options });
+  }
+  
+
+
+  /**
+   * Finalize a transfer of AVAX from either the
+   * P-Chain to the X-Chain or the C-Chain to
+   * the X-Chain.Before this method is called, you must
+   * call either the P-Chain’s `exportAVAX` method or the
+   * C-Chain’s `exportAVAX` method to initiate the transfer.
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-importavax)
+   */
   importAVAX(options: AVMImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.importAVAX", params: options });
   }
@@ -923,7 +1011,7 @@ export class AVM extends Rpc {
   /**
    * Give a user control over an address by
    * providing the private key that controls the address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmimportkey)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-importkey)
    */
   importKey(options: AVMImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.importKey", params: options });
@@ -933,7 +1021,7 @@ export class AVM extends Rpc {
 
   /**
    * Send a signed transaction to the network.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmissuetx)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-issuetx)
    */
   issueTx(options: AVMIssueTxOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.issueTx", params: options });
@@ -943,7 +1031,7 @@ export class AVM extends Rpc {
 
   /**
    * List addresses controlled by the given user.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmlistaddresses)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-listaddresses)
    */
   listAddresses(options: AVMListAddressesOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.listAddresses", params: options });
@@ -954,7 +1042,7 @@ export class AVM extends Rpc {
   /**
    * Create an unsigned transaction to mint more of
    * a variable-cap asset (an asset created with `avm.createVariableCapAsset`.)
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmcreateminttx)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-mint)
    */
   mint(options: AVMMintOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -965,7 +1053,7 @@ export class AVM extends Rpc {
 
   /**
    * Mint more of a non-fungible asset (an asset
-   * created with `avm.createNFTAsset`.) @url(https://docs.avax.network/v1.0/en/api/avm/#avmmintnft)
+   * created with `avm.createNFTAsset`.) @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-mintnft)
    */
   mintNFT(options: AVMMintNFTOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -977,7 +1065,7 @@ export class AVM extends Rpc {
   /**
    * Send a quantity of an asset to an
    * address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-send)
    */
   send(options: AVMSendOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -989,7 +1077,7 @@ export class AVM extends Rpc {
   /**
    * Send a quantity of an asset to an
    * address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-sendmultiple)
    */
   sendMultiple(options: AVMSendMultipleOptions) {
     return this.fetch({ endpoint: "ext/bc/X", method: "avm.sendMultiple", params: options });
@@ -1000,7 +1088,7 @@ export class AVM extends Rpc {
   /**
    * Send a quantity of an asset to an
    * address.
-   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmsend)
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-sendnft)
    */
   sendNFT(options: AVMSendNFTOptions) {
 		options.assetID = options.assetID || ASSET_ID_AVAX;
@@ -1027,7 +1115,7 @@ export class EVM extends Rpc {
   
   /**
    * Getting the most recent block number.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-most-recent-block-number)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-the-most-recent-block-number)
    */
   eth_blockNumber() {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_blockNumber" });
@@ -1037,7 +1125,7 @@ export class EVM extends Rpc {
 
   /**
    * Call a contract.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#call-a-contract)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#call-a-contract)
    */
   eth_call(options: EVMEthCallOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_call", params: options });
@@ -1048,7 +1136,7 @@ export class EVM extends Rpc {
   /**
    * Not well documented in JSON-RPC references. See instead
    * EIP694.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-the-chain-id)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-the-chain-id)
    */
   eth_chainId() {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_chainId" });
@@ -1057,8 +1145,18 @@ export class EVM extends Rpc {
 
 
   /**
+   * Getting an account’s non-AVAX balance.
+   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-non-avax-balance)
+   */
+  eth_getAssetBalance(options: EVMEthGetAssetBalanceOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getAssetBalance", params: options });
+  }
+  
+
+
+  /**
    * Getting an account’s balance.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-balance)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-an-accounts-balance)
    */
   eth_getBalance(options: EVMEthGetBalanceOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBalance", params: options });
@@ -1071,7 +1169,7 @@ export class EVM extends Rpc {
    * transaction, but will not publish it automatically to
    * the network. Instead, the `raw` result output should
    * be used with `eth_sendRawTransaction` to execute the transaction.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#signing-a-transaction)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#signing-a-transaction)
    */
   eth_signTransaction(options: EVMEthSignTransactionOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_signTransaction", params: options });
@@ -1081,7 +1179,7 @@ export class EVM extends Rpc {
 
   /**
    * Getting an account’s nonce.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-an-accounts-nonce)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-an-accounts-nonce)
    */
   eth_getTransactionCount(options: EVMEthGetTransactionCountOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getTransactionCount", params: options });
@@ -1093,7 +1191,7 @@ export class EVM extends Rpc {
    * Send a raw transaction.Example below shows a raw
    * transaction published to the network and its associated
    * transaction hash.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#send-a-raw-transaction)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#send-a-raw-transaction)
    */
   eth_sendRawTransaction(options: EVMEthSendRawTransactionOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_sendRawTransaction", params: options });
@@ -1103,7 +1201,7 @@ export class EVM extends Rpc {
 
   /**
    * Getting a block by hash.
-   * @url(https://docs.avax.network/v1.0/en/api/evm/#getting-a-block-by-hash)
+   * @url(https://docs.avax.network/build/apis/contract-chain-c-chain-api#getting-a-block-by-hash)
    */
   eth_getBlockByHash(options: EVMEthGetBlockByHashOptions) {
     return this.fetch({ endpoint: "ext/bc/C/rpc", method: "eth_getBlockByHash", params: options });
@@ -1148,6 +1246,20 @@ export class EVM extends Rpc {
    * transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
    */
+  export(options: EVMExportOptions) {
+		options.assetID = options.assetID || ASSET_ID_AVAX;
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.export", params: options });
+  }
+  
+
+
+  /**
+   * Send AVAX from the X-Chain to an account
+   * on the P-Chain.After calling this method, you must
+   * call the P-Chain’s `importAVAX` method to complete the
+   * transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   */
   exportAVAX(options: EVMExportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.exportAVAX", params: options });
   }
@@ -1167,11 +1279,54 @@ export class EVM extends Rpc {
 
 
   /**
+   * Returns the specified transaction @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetbalance)
+   */
+  getTx(options: EVMGetTxOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.getTx", params: options });
+  }
+  
+
+
+  /**
+   * Get the status of a transaction sent to
+   * the network.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgettxstatus)
+   */
+  getTxStatus(options: EVMGetTxStatusOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.getTxStatus", params: options });
+  }
+  
+
+
+  /**
+   * Get the UTXOs that reference a given address.
+   * @url(https://docs.avax.network/v1.0/en/api/avm/#avmgetutxos)
+   */
+  getUTXOs(options: EVMGetUTXOsOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.getUTXOs", params: options });
+  }
+  
+
+
+  /**
    * Send AVAX from the X-Chain to an account
    * on the P-Chain.After calling this method, you must
    * call the P-Chain’s `importAVAX` method to complete the
    * transfer.
    * @url(https://docs.avax.network/v1.0/en/api/avm/#avmexportavax)
+   */
+  import(options: EVMImportOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.import", params: options });
+  }
+  
+
+
+  /**
+   * Import AVAX from the X-Chain to an account
+   * on the C-Chain.Before calling this method, you must
+   * call the X-Chain’s `exportAVAX` method to initiate the
+   * transfer.
+   * @url(https://docs.avax.network/v1.0/en/api/evm/#evmimportavax)
    */
   importAVAX(options: EVMImportAVAXOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importAVAX", params: options });
@@ -1186,6 +1341,16 @@ export class EVM extends Rpc {
    */
   importKey(options: EVMImportKeyOptions) {
     return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.importKey", params: options });
+  }
+  
+
+
+  /**
+   * Send a signed transaction to the network.
+   * @url(https://docs.avax.network/build/apis/exchange-chain-x-chain-api#avm-issuetx)
+   */
+  issueTx(options: EVMIssueTxOptions) {
+    return this.fetch({ endpoint: "ext/bc/C/avax", method: "avax.issueTx", params: options });
   }
   
 
@@ -1314,7 +1479,7 @@ export class Health extends Rpc {
   
   /**
    * Get health check on this node.
-   * @url(https://docs.avax.network/v1.0/en/api/health/#healthgetliveness)
+   * @url(https://docs.avax.network/build/apis/health-api#health-getliveness)
    */
   getLiveness() {
     return this.fetch({ endpoint: "ext/health", method: "health.getLiveness" });
@@ -1333,7 +1498,7 @@ export class Info extends Rpc {
   
   /**
    * Given a blockchain’s alias, get its ID.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infogetblockchainid)
+   * @url(https://docs.avax.network/build/apis/info-api#info-getblockchainid)
    */
   getBlockchainID(options: InfoGetBlockchainIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getBlockchainID", params: options });
@@ -1344,7 +1509,7 @@ export class Info extends Rpc {
   /**
    * Get the ID of the network this node
    * is participating in.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnetworkid)
+   * @url(https://docs.avax.network/build/apis/info-api#info-getnetworkid)
    */
   getNetworkID(options: InfoGetNetworkIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNetworkID", params: options });
@@ -1355,7 +1520,7 @@ export class Info extends Rpc {
   /**
    * Get the name of the network this node
    * is participating in.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnetworkname)
+   * @url(https://docs.avax.network/build/apis/info-api#info-getnetworkname)
    */
   getNetworkName(options: InfoGetNetworkNameOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNetworkName", params: options });
@@ -1366,7 +1531,7 @@ export class Info extends Rpc {
   /**
    * Get the name of the network this node
    * is participating in.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnodeid)
+   * @url(https://docs.avax.network/build/apis/info-api#info-getnodeid)
    */
   getNodeID(options: InfoGetNodeIDOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNodeID", params: options });
@@ -1375,8 +1540,18 @@ export class Info extends Rpc {
 
 
   /**
+   * Get the IP of this node.
+   * @url(https://docs.avax.network/build/apis/info-api#info-getnodeip)
+   */
+  getNodeIP(options: InfoGetNodeIPOptions) {
+    return this.fetch({ endpoint: "ext/info", method: "info.getNodeIP", params: options });
+  }
+  
+
+
+  /**
    * Get the version of this node.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infogetnodeversion)
+   * @url(https://docs.avax.network/build/apis/info-api#info-getnodeversion)
    */
   getNodeVersion(options: InfoGetNodeVersionOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.getNodeVersion", params: options });
@@ -1386,7 +1561,7 @@ export class Info extends Rpc {
 
   /**
    * Check whether a given chain is done bootstrapping.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infoisbootstrapped)
+   * @url(https://docs.avax.network/build/apis/info-api#info-isbootstrapped)
    */
   isBootstrapped(options: InfoIsBootstrappedOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.isBootstrapped", params: options });
@@ -1406,7 +1581,7 @@ export class Info extends Rpc {
 
   /**
    * Get description of peer connections.
-   * @url(https://docs.avax.network/v1.0/en/api/info/#infopeers)
+   * @url(https://docs.avax.network/build/apis/info-api#info-peers)
    */
   peers(options: InfoPeersOptions) {
     return this.fetch({ endpoint: "ext/info", method: "info.peers", params: options });
@@ -1431,7 +1606,7 @@ export class IPC extends Rpc {
   /**
    * Register a blockchain so it publishes accepted vertices
    * to a Unix domain socket.
-   * @url(https://docs.avax.network/v1.0/en/api/ipc/#ipcspublishblockchain)
+   * @url(https://docs.avax.network/build/apis/ipc-api#ipcs-publishblockchain)
    */
   publishBlockchain(options: IPCPublishBlockchainOptions) {
     return this.fetch({ endpoint: "ext/ipcs", method: "ipcs.publishBlockchain", params: options });
@@ -1442,7 +1617,7 @@ export class IPC extends Rpc {
   /**
    * Deregister a blockchain so that it no longer
    * publishes to a Unix domain socket.
-   * @url(https://docs.avax.network/v1.0/en/api/ipc/#ipcspublishblockchain)
+   * @url(https://docs.avax.network/build/apis/ipc-api#ipcs-unpublishblockchain)
    */
   unpublishBlockchain(options: IPCUnpublishBlockchainOptions) {
     return this.fetch({ endpoint: "ext/ipcs", method: "ipcs.unpublishBlockchain", params: options });
@@ -1470,7 +1645,7 @@ export class Keystore extends Rpc {
   /**
    * Create a new user with the specified username
    * and password.
-   * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystorecreateuser)
+   * @url(https://docs.avax.network/build/apis/keystore-api#keystore-createuser)
    */
   createUser(options: KeystoreCreateUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.createUser", params: options });
@@ -1480,7 +1655,7 @@ export class Keystore extends Rpc {
 
   /**
    * Delete a user.
-   * @url(https://docs.avax.network/v1.0/en/api/keystore/#kesytoredeleteuser)
+   * @url(https://docs.avax.network/build/apis/keystore-api#keystore-deleteuser)
    */
   deleteUser(options: KeystoreDeleteUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.deleteUser", params: options });
@@ -1492,7 +1667,7 @@ export class Keystore extends Rpc {
    * Export a user. The user can be imported
    * to another node with `keystore.importUser`. The user’s password
    * remains encrypted.
-   * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystoreexportuser)
+   * @url(https://docs.avax.network/build/apis/keystore-api#keystore-exportuser)
    */
   exportUser(options: KeystoreExportUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.exportUser", params: options });
@@ -1504,7 +1679,7 @@ export class Keystore extends Rpc {
    * Import a user. `password` must match the user’s
    * password. `username` doesn’t have to match the username
    * `user` had when it was exported.
-   * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystoreimportuser)
+   * @url(https://docs.avax.network/build/apis/keystore-api#keystore-importuser)
    */
   importUser(options: KeystoreImportUserOptions) {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.importUser", params: options });
@@ -1514,7 +1689,7 @@ export class Keystore extends Rpc {
 
   /**
    * List the users in this keystore.
-   * @url(https://docs.avax.network/v1.0/en/api/keystore/#keystorelistusers)
+   * @url(https://docs.avax.network/build/apis/keystore-api#keystore-listusers)
    */
   listUsers() {
     return this.fetch({ endpoint: "ext/keystore", method: "keystore.listUsers" });
@@ -1692,7 +1867,7 @@ export class PlatformVM extends Rpc {
    * @url(https://docs.avax.network/v1.0/en/api/platform/#platformgetheight)
    */
   getHeight(options: PlatformVMGetHeightOptions) {
-    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getStakingAssetID", params: options });
+    return this.fetch({ endpoint: "ext/bc/P", method: "platform.getHeight", params: options });
   }
   
 
